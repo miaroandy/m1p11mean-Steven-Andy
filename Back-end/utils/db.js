@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 
-const url = "mongodb+srv://steven:mWUTfuLQ0Jxix7Oy@cluster0.l10uur7.mongodb.net/?retryWrites=true&w=majority";
+const url = process.env.DB_URL;
 
 const connectDB = async () => {
   try {
