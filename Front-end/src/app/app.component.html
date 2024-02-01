@@ -1,7 +1,7 @@
 <nz-layout class="layout">
     <div class="site-page-header-ghost-wrapper">
       <nz-page-header [nzGhost]="false">
-        <nz-page-header-title>Title</nz-page-header-title>
+        <nz-page-header-title>Beauty-Full</nz-page-header-title>
         <nz-page-header-extra>
           <ul nz-menu nzMode="horizontal">
             <li nz-menu-item nzSelected>
@@ -48,7 +48,15 @@
       </nz-page-header>
     </div>
   <nz-content>
-    <div class="inner-content">Content</div>
+    <div class="inner-content">
+      <app-welcome></app-welcome>
+    </div>
   </nz-content>
-  <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+  <nz-footer>
+    <nz-card nzTitle="Copyright 2024">
+      <div nz-card-grid>Steven</div>
+      <div nz-card-grid>Beauty-Full</div>
+      <div nz-card-grid>Razafiarison Miaro Andy</div>
+    </nz-card>
+  </nz-footer>
 </nz-layout>
