@@ -1,7 +1,7 @@
 <nz-layout class="layout">
     <div class="site-page-header-ghost-wrapper">
       <nz-page-header [nzGhost]="false">
-        <nz-page-header-title>Beauty-Full</nz-page-header-title>
+        <nz-page-header-title><a href="#">Beauty-Full</a></nz-page-header-title>
         <nz-page-header-extra>
           <ul nz-menu nzMode="horizontal">
             <li nz-menu-item nzSelected>
@@ -49,7 +49,7 @@
     </div>
   <nz-content>
     <div class="inner-content">
-      <app-welcome></app-welcome>
+      <router-outlet></router-outlet>
     </div>
   </nz-content>
   <nz-footer>

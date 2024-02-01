@@ -14,5 +14,5 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 registerLocaleData(fr);
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(), provideNzIcons(), provideNzI18n(fr_FR), importProvidersFrom(FormsModule), importProvidersFrom(HttpClientModule), provideAnimations()]
+  providers: [provideRouter(routes), provideClientHydration(), provideNzIcons(), provideNzI18n(fr_FR), importProvidersFrom(FormsModule), importProvidersFrom(HttpClientModule), provideAnimations(), provideAnimations()]
 };
