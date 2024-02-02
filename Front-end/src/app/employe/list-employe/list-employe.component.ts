@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { Employe } from '../../model/Employe';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { NgFor } from '@angular/common';
+import { NgFor,NgIf } from '@angular/common';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { CallAPI } from '../../utilitaires/CallAPI';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 
 @Component({
   selector: 'app-list-employe',
   standalone: true,
-  imports: [NzTableModule, NgFor, NzInputModule],
+  imports: [NzTableModule, NgFor, NzInputModule, NgIf, NzSpinModule],
   templateUrl: './list-employe.component.html',
   styleUrl: './list-employe.component.css',
   providers: [CallAPI]

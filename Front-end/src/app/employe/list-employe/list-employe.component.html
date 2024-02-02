@@ -1,16 +1,21 @@
-<nz-table #borderedTable nzBordered nzFooter="{{nbrEmployes}} résultats" nzTitle="Liste des employés" [nzData]="employes">
-    <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Prenom</th>
-            <th>Email</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let data of borderedTable.data">
-            <td>{{ data.nom }}</td>
-            <td>{{ data.prenom }}</td>
-            <td>{{ data.email }}</td>
-        </tr>
-    </tbody>
-</nz-table>
+<div *ngIf="employes">
+    <nz-table #borderedTable nzBordered nzFooter="{{nbrEmployes}} résultats" nzTitle="Liste des employés" [nzData]="employes">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of borderedTable.data">
+                <td>{{ data.nom }}</td>
+                <td>{{ data.prenom }}</td>
+                <td>{{ data.email }}</td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>
+<div *ngIf="!employes">
+    <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+</div>

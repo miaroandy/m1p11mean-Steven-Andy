@@ -16,4 +16,9 @@ export class CallAPI {
         const url=this.apiUrl+"employe";
         return this.http.get<Employe[]>(url);
     }
+
+    saveEmploye(employe: Employe): any{
+        const url=this.apiUrl+"employe";
+        return this.http.post(url,employe.toJSON());
+    }
 }
