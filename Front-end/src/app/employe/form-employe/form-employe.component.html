@@ -1,0 +1,23 @@
+<div nz-row>
+    <div nz-col nzSpan="8"></div>
+
+    <div nz-col nzSpan="8">
+        <form (ngSubmit)="onSubmit()" #employeForm="ngForm">
+            <input nz-input placeholder="Nom" [(ngModel)]="nom" name="nom" type="text" nzSize="large" />
+            <br />
+            <br />
+            <input nz-input placeholder="Prenom" [(ngModel)]="prenom" name="prenom" type="text" nzSize="large" />
+            <br />
+            <br />
+            <input nz-input placeholder="Email" [(ngModel)]="email" name="email" type="email" nzSize="large" />
+            <br />
+            <br />
+            <div>  
+                <button style="width: 100%;" type="submit" nz-button nzType="primary" nzSize="large" nzShape="round">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+
+    <div nz-col nzSpan="8"></div>
+
+</div>
