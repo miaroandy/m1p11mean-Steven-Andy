@@ -1,0 +1,23 @@
+<div *ngIf="services">
+  <nz-table #borderedTable nzBordered nzFooter="{{nbrServices}} résultats" nzTitle="Liste des services" [nzData]="services">
+      <thead>
+          <tr>
+              <th>Nom</th>
+              <th>Prix</th>
+              <th>Taux commission</th>
+              <th>Durée</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let data of borderedTable.data">
+              <td>{{ data.nom }}</td>
+              <td>{{ data.prix }}</td>
+              <td>{{ data.taux_commission }}</td>
+              <td>{{ data.duree }}</td>
+          </tr>
+      </tbody>
+  </nz-table>
+</div>
+<div *ngIf="!services">
+  <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+</div>
