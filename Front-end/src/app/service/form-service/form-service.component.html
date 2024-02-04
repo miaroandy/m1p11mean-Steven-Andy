@@ -1,0 +1,27 @@
+<h1 style="text-align: center; color: #1890ff;">Nouveau service</h1>
+<div nz-row>
+    <div nz-col nzSpan="8"></div>
+
+    <div nz-col nzSpan="8">
+        <form (ngSubmit)="onSubmit()" #serviceForm="ngForm">
+            <input nz-input placeholder="Nom" [(ngModel)]="service.nom" name="nom" type="text" nzSize="large" />
+            <br />
+            <br />
+            <input nz-input placeholder="Prix" [(ngModel)]="service.prix" name="prix" type="text" nzSize="large" />
+            <br />
+            <br />
+            <input nz-input placeholder="Taux commission" [(ngModel)]="service.taux_commission" name="taux_commission" type="number" nzSize="large" />
+            <br />
+            <br />
+            <input nz-input placeholder="Durée" [(ngModel)]="service.duree" name="duree" type="number" nzSize="large" />
+            <br />
+            <br />
+            <div>
+                <button style="width: 100%;" type="submit" nz-button nzType="primary" nzSize="large" nzShape="round">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+
+    <div nz-col nzSpan="8"></div>
+
+</div>
