@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-// app.use('/employe', employeRouter);
+app.use('/employe', employeRouter);
 app.use('/services', servicesRouter);
 
 module.exports = app;

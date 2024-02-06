@@ -1,37 +1,20 @@
 var express = require('express');
 var router = express.Router();
-const connectDB = require('../utils/db');
+const Employe = require('../models/Employe');
 
-const appel = async () => {
-    try {
-        const db = await connectDB();
-        const collection = db.collection("employes_collection");
-        return collection;
-    } catch (error) {
-        console.error('Erreur lors de la configuration de l\'application', error);
-    }
-};
+router.post('/', async (req, res) => {
+try {
+    const service = new Employe(req.body);
+    await service.save();
+    res.status(201).json(service);
+} catch (err) {
+    res.status(400).json({ message: err.message });
+}
+});
 
-appel().then((resultat) =>{
-
-    router.get('/', async function (req, res, next) {
-        resultat.find().toArray()
-            .then(results => {
-                res.json(results)
-            })
-            .catch(error => console.log(error))
-    });
-
-    router.post('/', (req, res) => {
-        resultat.insertOne(req.body)
-            .then(result => {
-                res.json(result)
-            })
-            .catch(error => console.error(error))
-    })
-
-}).catch((erreur)=>{
-    console.error(erreur)
+router.get('/', async (req, res) => {
+    const services = await Employe.find();
+    res.json(services);
 });
 
 module.exports = router;
