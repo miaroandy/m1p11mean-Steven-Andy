@@ -1,16 +1,17 @@
-const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
 
 const url = process.env.DB_URL;
 
-const connectDB = async () => {
-  try {
-    const client = await MongoClient.connect(url);
-    console.log('Connecté à la base de données MongoDB');
-    return client.db('salonbeautedb');
-  } catch (error) {
-    console.error('Erreur de connexion à la base de données', error);
-    throw error;
-  }
-};
+mongoose.connect(url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
-module.exports = connectDB;
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'Erreur de connexion à MongoDB :'));
+db.once('open', () => {
+  console.log('Connecté à MongoDB');
+});
+
+module.exports = db;
