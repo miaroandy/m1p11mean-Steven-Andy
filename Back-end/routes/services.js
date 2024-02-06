@@ -1,38 +1,48 @@
 var express = require('express');
 var router = express.Router();
-const connectDB = require('../utils/db');
-const { ObjectId } = require('mongodb');
+const Service = require('../models/Service')
 
-connectDB()
-  .then(database => {
-    const collection = database.collection('services_collection');
+router.post('/', async (req, res) => {
+  try {
+    const service = new Service(req.body);
+    await service.save();
+    res.status(201).json(service);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
 
-    router.post('/', async (req, res) => {
-      const newService = req.body;
-      const result = await collection.insertOne(newService);
-      res.json({ _id: result.insertedId, ...newService });
-    });
+router.get('/', async (req, res) => {
+  const services = await Service.find();
+  res.json(services);
+});
 
-    router.get('/', async (req, res) => {
-      const services = await collection.find().toArray();
-      res.json(services);
-    });
+router.get('/:id', getService, (req, res) => {
+  res.json(res.service);
+});
 
-    router.get('/:id', async (req, res) => {
-      const service = await collection.findOne({ _id: new ObjectId(req.params.id) });
-      res.json(service);
-    });
+router.delete('/:id', async (req, res) => {
+  try {
+    await res.service.remove();
+    res.json({ message: 'Service supprimé' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
-    router.put('/:id', async (req, res) => {
-      const updatedService = req.body;
-      await collection.updateOne({ _id: new ObjectId(req.params.id) }, { $set: updatedService });
-      res.json({ message: 'Service mis à jour avec succès' });
-    });
-
-    router.delete('/:id', async (req, res) => {
-      await collection.deleteOne({ _id: new ObjectId(req.params.id) });
-      res.json({ message: 'Service supprimé avec succès' });
-    });
+async function getService(req, res, next) {
+  let service;
+  try {
+    service = await Service.findById(req.params.id);
+    if (service == null) {
+      return res.status(404).json({ message: 'Service introuvable' });
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+  res.service = service;
+  next();
+}
 
     // router.post('/services/:id/offres-speciales', async (req, res) => {
     //   const serviceId = req.params.id;
@@ -70,9 +80,5 @@ connectDB()
 
     //   res.json({ message: 'Offre spéciale supprimée avec succès' });
     // });
-  })
-  .catch(err => {
-    console.error('Erreur de démarrage du serveur :', err);
-  });
 
 module.exports = router;
