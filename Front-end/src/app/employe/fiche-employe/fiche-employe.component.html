@@ -7,16 +7,16 @@
 
     <div nz-col nzSpan="8" >
 
-        <nz-card style="width:100%; text-align: center;"  [nzActions]="[ actionEdit]" >
+        <nz-card style="width:100%; text-align: center;"  [nzActions]="[ actionEdit,actionDelete]" >
             <nz-card-meta nzTitle="{{employe.nom}} {{employe.prenom}}" nzDescription="{{employe.email}}"
                 ></nz-card-meta>
         </nz-card>
         <ng-template #actionEdit>
             <span nz-icon nzType="edit"></span>
         </ng-template>
-
-        
-
+        <ng-template #actionDelete>
+            <span nz-icon nzType="delete" nzTheme="outline"></span>
+        </ng-template>      
     </div>
 
     <div nz-col nzSpan="8"></div>
