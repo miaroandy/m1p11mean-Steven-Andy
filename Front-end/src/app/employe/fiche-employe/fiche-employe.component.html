@@ -1,0 +1,22 @@
+<h1 nz-typography style="text-align: center; color: #1890ff;">Fiche employé</h1>
+<div *ngIf="loading" style="text-align: center; margin-top: 100px;">
+    <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+</div>
+<div nz-row *ngIf="!loading">
+    <div nz-col nzSpan="8"></div>
+
+    <div nz-col nzSpan="8" >
+
+        <nz-card style="width:100%; text-align: center;"  [nzActions]="[ actionEdit]" >
+            <nz-card-meta nzTitle="{{employe.nom}} {{employe.prenom}}" nzDescription="{{employe.email}}"
+                ></nz-card-meta>
+        </nz-card>
+        <ng-template #actionEdit>
+            <span nz-icon nzType="edit"></span>
+        </ng-template>
+
+    </div>
+
+    <div nz-col nzSpan="8"></div>
+    
+</div>

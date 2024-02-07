@@ -1,9 +1,9 @@
-<h1 style="text-align: center; color: #1890ff;">Nouvelle employée</h1>
-<div nz-row>
+<h1 nz-typography style="text-align: center; color: #1890ff;">Nouvelle employée</h1>
+<div nz-row >
     <div nz-col nzSpan="8"></div>
 
-    <div nz-col nzSpan="8">
-        <form (ngSubmit)="onSubmit()" #employeForm="ngForm">
+    <div nz-col nzSpan="8" *ngIf="!loading">
+        <form #employeForm="ngForm">
             <input nz-input placeholder="Nom" [(ngModel)]="employe.nom" name="nom" type="text" nzSize="large" />
             <br />
             <br />
@@ -14,11 +14,15 @@
             <br />
             <br />
             <div>  
-                <button style="width: 100%;" type="submit" nz-button nzType="primary" nzSize="large" nzShape="round">Enregistrer</button>
+                <button (click)="onClick()" style="width: 100%;" type="button" nz-button nzType="primary" nzSize="large" nzShape="round">Enregistrer</button>
             </div>
         </form>
+    </div>
+    <div *ngIf="loading" nz-col nzSpan="8">
+        <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
     </div>
 
     <div nz-col nzSpan="8"></div>
 
 </div>
+

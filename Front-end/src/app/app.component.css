@@ -17,11 +17,11 @@
 
 [nz-menu] {
   line-height: 64px;
-  background-color: #43cea2;
+  background-color: #009688;
 }
 
 nz-page-header{
-    background-color: #43cea2;
+    background-color: #009688;
 }
 
 nz-content {
@@ -37,5 +37,5 @@ nz-content {
 
 nz-footer {
   text-align: center;
-  background-color: #43cea2;
+  background-color: #009688;
 }

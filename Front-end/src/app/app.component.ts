@@ -7,12 +7,14 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { WelcomeComponent } from './pages/welcome/welcome.component'
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NzLayoutModule, NzPageHeaderModule, NzSpaceModule, NzMenuModule, NzIconModule, WelcomeComponent, NzCardModule],
+  imports: [RouterOutlet, NzTypographyModule, NzLayoutModule, NzPageHeaderModule, NzSpaceModule, NzMenuModule, NzIconModule, WelcomeComponent, NzCardModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
