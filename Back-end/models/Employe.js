@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const rendezVous=require('./RendezVous');
 
 const horairesTravail = new mongoose.Schema({
   jour: { type: String, required: true },
@@ -18,14 +19,6 @@ const employeSchema = new mongoose.Schema({
   horaires_travail:[horairesTravail],
   taches_effectuees: [tachesEffectuees]
 });
-
-const rendezvousSchema = new mongoose.Schema({
-  date: { type: Date, required: true },
-  employe: { type: mongoose.Schema.Types.ObjectId, ref: 'Employe' }
-});
-
-const RendezVous = mongoose.model('RendezVous', rendezvousSchema, 'rendezvous_collection');
-
 
 const Employe = mongoose.model('Employe', employeSchema, 'employes_collection');
 
