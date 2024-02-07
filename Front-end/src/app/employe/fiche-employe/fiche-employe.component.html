@@ -15,8 +15,55 @@
             <span nz-icon nzType="edit"></span>
         </ng-template>
 
+        
+
     </div>
 
     <div nz-col nzSpan="8"></div>
     
+</div>
+<br>
+<br>
+<div *ngIf="!loading">
+    <h3 nz-typography style="text-align: center; color: #1890ff;">Horaire de travail</h3>
+    <div style="padding:30px;">
+        <div nz-row [nzGutter]="8">
+            <div nz-col [nzSpan]="4">
+                <nz-card nzTitle="Lundi">
+                    <p *ngIf="horaire.get('lundi')"> {{horaire.get('lundi')}} </p>
+                    <p *ngIf="!horaire.get('lundi')"> Ne travail pas </p>
+                </nz-card>
+            </div>
+            <div nz-col [nzSpan]="4">
+                <nz-card nzTitle="Mardi">
+                    <p *ngIf="horaire.get('mardi')"> {{horaire.get('mardi')}} </p>
+                    <p *ngIf="!horaire.get('mardi')"> Ne travail pas </p>
+                </nz-card>
+            </div>
+            <div nz-col [nzSpan]="4">
+                <nz-card nzTitle="Mercredi">
+                    <p *ngIf="horaire.get('mercredi')"> {{horaire.get('mercredi')}} </p>
+                    <p *ngIf="!horaire.get('mercredi')"> Ne travail pas </p>
+                </nz-card>
+            </div>
+            <div nz-col [nzSpan]="4">
+                <nz-card nzTitle="Jeudi">
+                    <p *ngIf="horaire.get('jeudi')"> {{horaire.get('jeudi')}} </p>
+                    <p *ngIf="!horaire.get('jeudi')"> Ne travail pas </p>
+                </nz-card>
+            </div>
+            <div nz-col [nzSpan]="4">
+                <nz-card nzTitle="Vendredi">
+                    <p *ngIf="horaire.get('vendredi')"> {{horaire.get('vendredi')}} </p>
+                    <p *ngIf="!horaire.get('vendredi')"> Ne travail pas </p>
+                </nz-card>
+            </div>
+            <div nz-col [nzSpan]="4">
+                <nz-card nzTitle="Samedi">
+                    <p *ngIf="horaire.get('samedi')"> {{horaire.get('samedi')}} </p>
+                    <p *ngIf="!horaire.get('samedi')"> Ne travail pas </p>
+                </nz-card>
+            </div>
+        </div>
+    </div>
 </div>

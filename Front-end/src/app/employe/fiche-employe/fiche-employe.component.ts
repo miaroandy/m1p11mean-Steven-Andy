@@ -8,6 +8,7 @@ import { NgIf } from '@angular/common';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { HoraireTravail } from '../../model/HoraireTravail';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class FicheEmployeComponent implements OnInit {
     loading=true;
     employe:Employe=new Employe();
     id:string='';
+    horaire: Map<string,string>=new Map(); 
     
     constructor(private callAPI: CallAPI,
         private route: ActivatedRoute
@@ -31,7 +33,16 @@ export class FicheEmployeComponent implements OnInit {
         this.id ="65bb74dda07e2e10fcb3b57d";
         this.callAPI.getEmployeById(this.id).subscribe(result => {
             this.employe = result;
+            this.setHoraire(this.employe.horaires_travail);
             this.loading=false;
         });
+    }
+
+    setHoraire(horairedetravail: HoraireTravail[]){
+        for (let index = 0; index < horairedetravail.length; index++) {
+            const element = horairedetravail[index];
+            const s="De "+element.heure_debut+" à "+element.heure_fin;
+            this.horaire.set(element.jour,s);
+        }
     }
 }
