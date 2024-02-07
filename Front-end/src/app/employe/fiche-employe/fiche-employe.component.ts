@@ -30,7 +30,6 @@ export class FicheEmployeComponent implements OnInit {
 
     ngOnInit() {
         this.id=this.route.snapshot.params['id'];
-        this.id ="65bb74dda07e2e10fcb3b57d";
         this.callAPI.getEmployeById(this.id).subscribe(result => {
             this.employe = result;
             this.setHoraire(this.employe.horaires_travail);
