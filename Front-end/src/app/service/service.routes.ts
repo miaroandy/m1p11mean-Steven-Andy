@@ -1,6 +1,10 @@
 import { Routes } from '@angular/router';
-import { ServiceComponent } from './service.component';
+import { ListServiceComponent } from './list-service/list-service.component';
+import { FormServiceComponent } from './form-service/form-service.component';
+// import { FicheServiceComponent } from './fiche-service/fiche-service.component';
 
 export const SERVICE_ROUTES: Routes = [
-    { path: '', component: ServiceComponent },
+  { path: 'add', component: FormServiceComponent },
+  // { path: ':id', component: FicheServiceComponent },
+  { path: '', component: ListServiceComponent }
 ];

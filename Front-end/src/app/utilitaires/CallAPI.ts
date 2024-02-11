@@ -51,6 +51,14 @@ export class CallAPI {
         return this.http.get<Service[]>(url);
     }
 
+    getServiceById(id: string): Observable<Service> {
+        const url = this.apiUrl + "employe/"+id;
+        return this.http.get<Service>(url).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, []))
+        );
+    }
+
     saveService(service: Service): any{
         const url = this.apiUrl + "services";
         return this.http.post(url, service.toJSON());
