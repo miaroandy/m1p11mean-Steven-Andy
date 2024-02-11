@@ -1,4 +1,5 @@
-<div *ngIf="services">
+<h1 nz-typography style="text-align: center; color: #1890ff;">Liste service</h1>
+<div *ngIf="!loading">
   <nz-table #borderedTable nzBordered nzFooter="{{nbrServices}} résultats" nzTitle="Liste des services" [nzData]="services">
       <thead>
           <tr>
@@ -14,10 +15,11 @@
               <td>{{ data.prix }}</td>
               <td>{{ data.taux_commission }}</td>
               <td>{{ data.duree }}</td>
+              <td><button type="button" (click)="onClick(data._id)" nz-button nzType="primary">Détails</button></td>
           </tr>
       </tbody>
   </nz-table>
 </div>
-<div *ngIf="!services">
+<div *ngIf="loading"  style="text-align: center; margin-top: 100px;">
   <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
 </div>
