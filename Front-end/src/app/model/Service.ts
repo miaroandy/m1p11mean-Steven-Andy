@@ -4,23 +4,22 @@ export class Service {
   prix: number;
   duree: number;
   taux_commission: number;
-  offresSpeciales: OffreSpeciale[];
+  photo: string;
+  offres_speciales: OffreSpeciale[];
 
   constructor() {
-    this._id = "";
+    this._id = '';
     this.nom = '';
     this.prix = 0;
     this.duree = 0;
+    this.photo = '';
     this.taux_commission = 0;
-    this.offresSpeciales = [];
+    this.offres_speciales = [];
   }
 
   toJSON(): any {
-    const { _id, offresSpeciales, ...autresAttributs } = this;
-    return {
-      offresSpeciales: offresSpeciales.map(offre => offre.toJSON()),
-      ...autresAttributs,
-    };
+    const { _id, ...autresAttributs } = this;
+    return autresAttributs;
   }
 }
 
@@ -35,10 +34,5 @@ export class OffreSpeciale {
     this.datedebut = new Date();
     this.datefin = new Date();
     this.reduction = 0;
-  }
-
-  toJSON(): any {
-    const { _id, ...autresAttributs } = this;
-    return autresAttributs;
   }
 }
