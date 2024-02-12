@@ -10,10 +10,13 @@
             <input nz-input placeholder="Prix" [(ngModel)]="service.prix" name="prix" type="text" nzSize="large" />
             <br />
             <br />
+            <input nz-input placeholder="Durée" [(ngModel)]="service.duree" name="duree" type="number" nzSize="large" />
+            <br />
+            <br />
             <input nz-input placeholder="Taux commission" [(ngModel)]="service.taux_commission" name="taux_commission" type="number" nzSize="large" />
             <br />
             <br />
-            <input nz-input placeholder="Durée" [(ngModel)]="service.duree" name="duree" type="number" nzSize="large" />
+            <input nz-input placeholder="Photo" [(ngModel)]="service.photo" name="photo" type="file" nzSize="large" (change)="onFileSelected($event)"/>
             <br />
             <br />
             <div>

@@ -26,6 +26,28 @@ export class FormServiceComponent {
     private router: Router
   ) { }
 
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+
+    if (file) {
+      this.convertFileToBase64(file);
+    }
+  }
+
+  convertFileToBase64(file: File): void {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      this.service.photo = reader.result as string;
+    };
+
+    reader.onerror = (error) => {
+      console.error('Erreur lors de la lecture du fichier', error);
+    };
+
+    reader.readAsDataURL(file);
+  }
+
   onClick(){
     this.loading = true;
     this.callAPI.saveService(this.service).subscribe(

@@ -1,0 +1,39 @@
+<h1 nz-typography style="text-align: center; color: #1890ff;">Fiche service</h1>
+<div *ngIf="loading" style="text-align: center; margin-top: 100px;">
+    <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+</div>
+<div nz-row *ngIf="!loading">
+    <div nz-col nzSpan="8"></div>
+
+    <div nz-col nzSpan="8" >
+
+        <nz-card style="width:100%; text-align: center;"  [nzActions]="[ actionEdit,actionDelete]" >
+          <img *ngIf="service.photo" [src]="service.photo" alt="Photo du service" style="max-width: 100%; max-height: 200px; margin-bottom: 10px;">
+            <nz-card-meta nzTitle="{{service.nom}}" nzDescription="{{service.prix}} Ar - {{service.duree}} min - {{service.taux_commission}} %"
+                ></nz-card-meta>
+        </nz-card>
+        <ng-template #actionEdit>
+            <span nz-icon nzType="edit"></span>
+        </ng-template>
+        <ng-template #actionDelete>
+            <span nz-icon nzType="delete" nzTheme="outline"></span>
+        </ng-template>
+    </div>
+
+    <div nz-col nzSpan="8"></div>
+
+</div>
+<br>
+<br>
+<div *ngIf="!loading">
+    <h3 nz-typography style="text-align: center; color: #1890ff;">Offres spéciales</h3>
+    <div style="padding:30px;">
+        <div nz-row [nzGutter]="8">
+            <div nz-col [nzSpan]="4" *ngfor="let offre of offres">
+                <nz-card nzTitle="{{offre.date_debut}} - {{offre.date_fin}}">
+                    <p> {{offre.reduction}} </p>
+                </nz-card>
+            </div>
+        </div>
+    </div>
+</div>
