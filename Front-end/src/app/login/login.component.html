@@ -15,6 +15,10 @@
             </div>
             <button type="button" (click)="onClick()">Se connecter</button>
         </form>
+        <div class="loading-spinner" *ngIf="loading">
+            <div class="spinner"></div>
+            <p>Chargement en cours...</p>
+        </div>
         <div *ngIf="loginError" class="error-message">
             Identifiants invalides. Veuillez réessayer.
         </div>

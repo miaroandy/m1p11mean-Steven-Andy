@@ -25,6 +25,10 @@
             </div>
             <button type="button" (click)="onClick()">S'inscrire</button>
         </form>
+        <div class="loading-spinner" *ngIf="loading">
+            <div class="spinner"></div>
+            <p>Chargement en cours...</p>
+        </div>
         <div *ngIf="error" class="error-message">
             Une erreur s'est produite lors de l'inscription. Veuillez réessayer.
         </div>
