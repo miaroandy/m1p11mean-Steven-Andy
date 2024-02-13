@@ -5,6 +5,7 @@ import { Service } from '../model/Service';
 import { Observable,tap,catchError,of } from 'rxjs';
 import { Token } from '../model/Token';
 import { Login } from '../model/Login';
+import { Client } from '../model/Client';
 
 
 @Injectable({
@@ -24,6 +25,14 @@ export class CallAPI {
                 localStorage.setItem('identifiant',response.identifiant);
                 localStorage.setItem('role',response.role);
             }),
+            catchError((error) => this.handleError(error, []))
+        );
+    }
+
+    inscription(client: Client): Observable<Client>{
+        const url = this.apiUrl + "login/inscription";
+        return this.http.post<Client>(url, client).pipe(
+            tap((response) => this.log(response)),
             catchError((error) => this.handleError(error, []))
         );
     }

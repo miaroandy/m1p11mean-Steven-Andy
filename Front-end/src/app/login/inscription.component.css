@@ -4,12 +4,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 125vh;
     background: linear-gradient(135deg,  #5091AE, #009688);
 }
 
 .register-form {
-    width: 400px;
+    width: 700px;
     padding: 40px;
     background-color: #fff;
     border-radius: 10px;

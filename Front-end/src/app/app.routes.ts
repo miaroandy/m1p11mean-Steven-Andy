@@ -4,14 +4,14 @@ import { TemplateEmployeComponent } from './template/employe/templateEmploye.com
 import { InscriptionComponent } from './login/inscription.component';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: 'login/:role', component: LoginComponent },
   { path: 'inscription', component: InscriptionComponent },
   {
     path: 'employe',
-    component: TemplateEmployeComponent, // this is the component with the <router-outlet> in the template
+    component: TemplateEmployeComponent, 
     children: [
       {
-        path: 'service', // child route path
+        path: 'service', 
         loadChildren: () => import('./service/service.routes').then(m => m.SERVICE_ROUTES)
       },
       {

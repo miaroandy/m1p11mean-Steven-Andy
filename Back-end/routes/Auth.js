@@ -3,6 +3,7 @@ var router = express.Router();
 const jwt = require('jsonwebtoken');
 const Employe = require('../models/Employe');
 const Client = require('../models/Client');
+const crypto = require('crypto');
 const secretKey = process.env.secretKey;
 
 
@@ -30,11 +31,22 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.post('/inscription', async (req, res) => {
+    try {
+        req.body.mot_de_passe = cryptMDP(req.body.mot_de_passe);
+        const client = new Client(req.body);
+        await client.save();
+        res.status(201).json(client);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
 
 async function login(req,res) {
     const login={
         email: req.body.email,
-        mot_de_passe: req.body.mdp
+        mot_de_passe: cryptMDP(req.body.mdp)
     };
     let result= null;
     if (req.body.role === 'client') {
@@ -44,6 +56,13 @@ async function login(req,res) {
         result= await Employe.find(login);
     }
     return result;
+}
+
+function cryptMDP(mdp){
+    const hash = crypto.createHash('sha256');
+    hash.update(mdp);
+    const hashHex = hash.digest('hex');
+    return hashHex;
 }
 
 
