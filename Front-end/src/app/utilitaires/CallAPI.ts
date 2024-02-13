@@ -3,15 +3,30 @@ import { Injectable } from '@angular/core';
 import { Employe } from '../model/Employe';
 import { Service } from '../model/Service';
 import { Observable,tap,catchError,of } from 'rxjs';
+import { Token } from '../model/Token';
+import { Login } from '../model/Login';
 
 
 @Injectable({
     providedIn: 'root',
 })
 export class CallAPI {
-    apiUrl = 'https://salon-beaute-service.onrender.com/';
+    //apiUrl = 'https://salon-beaute-service.onrender.com/';
+    apiUrl = 'http://localhost:3000/';
 
     constructor(private http: HttpClient) { }
+
+    login(user: Login): Observable<Token>{
+        const url = this.apiUrl + "login";
+        return this.http.post<Token>(url,user).pipe(
+            tap((response) => {
+                localStorage.setItem('token',response.token);
+                localStorage.setItem('identifiant',response.identifiant);
+                localStorage.setItem('role',response.role);
+            }),
+            catchError((error) => this.handleError(error, []))
+        );
+    }
 
     getAllEmployes(): Observable<Employe[]> {
         const url=this.apiUrl+"employe";

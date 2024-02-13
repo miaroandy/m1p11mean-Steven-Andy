@@ -1,0 +1,88 @@
+/* menu.component.css */
+
+.menu {
+    background-color: #009688;
+    /* Couleur de fond du menu */
+}
+
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu ul li {
+    display: inline-block;
+    position: relative;
+    /* Pour positionner les sous-menus */
+}
+
+.menu ul li a {
+    color: #fff;
+    /* Couleur du texte des liens */
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+}
+
+.menu ul li:hover>ul.submenu {
+    display: block;
+    /* Affiche le sous-menu au survol */
+}
+
+.menu ul li:hover {
+    background-color: #00796b;
+    /* Couleur de fond au survol */
+}
+
+.submenu {
+    display: none;
+    /* Cache les sous-menus par défaut */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #00796b;
+    /* Couleur de fond des sous-menus */
+    z-index: 1000;
+    /* Assure que le sous-menu soit au-dessus du reste */
+}
+
+.submenu li {
+    display: block;
+}
+
+.submenu li a {
+    color: #fff;
+    /* Couleur du texte des sous-menus */
+    padding: 10px;
+}
+
+.submenu li:hover {
+    background-color: #004d40;
+    /* Couleur de fond des sous-menus au survol */
+}
+
+nz-footer {
+    text-align: center;
+    background-color: #009688;
+}
+
+.site-page-header-ghost-wrapper {
+    position: fixed;
+    width: 100%;
+}
+
+nz-page-header {
+    background-color: #009688;
+}
+
+nz-content {
+    padding: 0 50px;
+    margin-top: 64px;
+}
+
+.inner-content {
+    margin-top: 50px;
+    padding: 24px;
+    min-height: 380px;
+}
