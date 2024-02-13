@@ -24,5 +24,5 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '', pathMatch: 'full', redirectTo: '/employe/employe' }
+  { path: '', pathMatch: 'full', redirectTo: '/login/client' }
 ];
