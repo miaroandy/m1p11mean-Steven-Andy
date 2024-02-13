@@ -9,33 +9,3 @@
   margin: 16px 24px 16px 0;
   float: left;
 }
-
-.site-page-header-ghost-wrapper{
-  position: fixed;
-  width: 100%;
-}
-
-[nz-menu] {
-  line-height: 64px;
-  background-color: #009688;
-}
-
-nz-page-header{
-    background-color: #009688;
-}
-
-nz-content {
-  padding: 0 50px;
-  margin-top: 64px;
-}
-
-.inner-content {
-  margin-top: 50px;
-  padding: 24px;
-  min-height: 380px;
-}
-
-nz-footer {
-  text-align: center;
-  background-color: #009688;
-}

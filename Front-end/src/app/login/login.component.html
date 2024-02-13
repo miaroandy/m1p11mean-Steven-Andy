@@ -1,29 +1,25 @@
-<form nz-form class="login-form" >
-    <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your username!">
-            <nz-input-group nzPrefixIcon="user">
-                <input type="text" nz-input formControlName="userName" placeholder="Username" />
-            </nz-input-group>
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your Password!">
-            <nz-input-group nzPrefixIcon="lock">
-                <input type="password" nz-input formControlName="password" placeholder="Password" />
-            </nz-input-group>
-        </nz-form-control>
-    </nz-form-item>
-    <div nz-row class="login-form-margin">
-        <div nz-col [nzSpan]="12">
-            <label nz-checkbox formControlName="remember">
-                <span>Remember me</span>
-            </label>
+<!-- login.component.html -->
+
+<div class="login-container">
+    <h1 class="site-name">Beauty-Full</h1>
+    <div class="login-form">
+        <h2>Connectez-vous à votre compte</h2>
+        <form >
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="text" id="email" name="email" placeholder="Entrez votre adresse E-mail" [(ngModel)]="login.email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" [(ngModel)]="login.mdp" required>
+            </div>
+            <button type="button" (click)="onClick()">Se connecter</button>
+        </form>
+        <div *ngIf="loginError" class="error-message">
+            Identifiants invalides. Veuillez réessayer.
         </div>
-        <div nz-col [nzSpan]="12">
-            <a class="login-form-forgot">Forgot password</a>
+        <div class="register-link">
+            <p>Vous n'avez pas de compte ? <a routerLink="/inscription" >Inscrivez-vous ici</a></p>
         </div>
     </div>
-    <button nz-button class="login-form-button login-form-margin" >Log in</button>
-    Or
-    <a>register now!</a>
-</form>
+</div>
