@@ -76,7 +76,7 @@ export class CallAPI {
     }
 
     getServiceById(id: string): Observable<Service> {
-        const url = this.apiUrl + "employe/"+id;
+        const url = this.apiUrl + "services/"+id;
         return this.http.get<Service>(url).pipe(
             tap((response) => this.log(response)),
             catchError((error) => this.handleError(error, []))
