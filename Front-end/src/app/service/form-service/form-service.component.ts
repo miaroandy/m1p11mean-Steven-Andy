@@ -52,7 +52,7 @@ export class FormServiceComponent {
     this.loading = true;
     this.callAPI.saveService(this.service).subscribe(
       (data: any) => {
-        this.router.navigate(['/employe'])
+        this.router.navigate(['/employe/service'])
         this.loading=false;
       },
       (error: any) => {

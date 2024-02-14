@@ -1,0 +1,39 @@
+<div class="register-container">
+    <div class="register-form">
+        <h1 class="site-name">Beaty-Full</h1> 
+        <h2>Inscription</h2>
+        <form >
+            <div class="form-group">
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" id="username" name="username" placeholder="Entrez votre nom d'utilisateur" [(ngModel)]="client.nom" required>
+            </div>
+            <div class="form-group">
+                <label for="prenom">Prenom</label>
+                <input type="text" id="prenom" name="prenom" placeholder="Entrez votre prenom" [(ngModel)]="client.prenom" required>
+            </div>
+            <div class="form-group">
+                <label for="num">Numero de téléphone</label>
+                <input type="text" id="num" name="num" placeholder="Entrez votre numero de téléphone" [(ngModel)]="client.numero" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Adresse e-mail</label>
+                <input type="email" id="email" name="email" placeholder="Entrez votre adresse e-mail" [(ngModel)]="client.email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" [(ngModel)]="client.mot_de_passe" required>
+            </div>
+            <button type="button" (click)="onClick()">S'inscrire</button>
+        </form>
+        <div class="loading-spinner" *ngIf="loading">
+            <div class="spinner"></div>
+            <p>Chargement en cours...</p>
+        </div>
+        <div *ngIf="error" class="error-message">
+            Une erreur s'est produite lors de l'inscription. Veuillez réessayer.
+        </div>
+        <div class="login-link">
+            <p>Vous avez déjà un compte ? <a routerLink="/login/client">Connectez-vous ici</a></p>
+        </div>
+    </div>
+</div>
