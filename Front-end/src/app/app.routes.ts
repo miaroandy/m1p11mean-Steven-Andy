@@ -8,11 +8,15 @@ export const routes: Routes = [
   { path: 'inscription', component: InscriptionComponent },
   {
     path: 'employe',
-    component: TemplateEmployeComponent, 
+    component: TemplateEmployeComponent,
     children: [
       {
-        path: 'service', 
+        path: 'service',
         loadChildren: () => import('./service/service.routes').then(m => m.SERVICE_ROUTES)
+      },
+      {
+        path: 'depense',
+        loadChildren: () => import('./depense/depense.routes').then(m => m.DEPENSE_ROUTES)
       },
       {
         path: 'employe',

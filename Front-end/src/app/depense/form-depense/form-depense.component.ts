@@ -4,21 +4,21 @@ import { CallAPI } from '../../utilitaires/CallAPI';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { Service } from '../../model/Service';
+import { Depense } from '../../model/Depense';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-form-service',
+  selector: 'app-form-depense',
   standalone: true,
   imports: [NzInputModule, NzTypographyModule, FormsModule, NzButtonModule, NzGridModule, NgIf, NzSpinModule],
-  templateUrl: './form-service.component.html',
-  styleUrl: './form-service.component.css'
+  templateUrl: './form-depense.component.html',
+  styleUrl: './form-depense.component.css'
 })
-export class FormServiceComponent {
-  service: Service = new Service();
+export class FormDepenseComponent {
+  depense: Depense = new Depense();
   loading = false;
 
   constructor(
@@ -26,33 +26,11 @@ export class FormServiceComponent {
     private router: Router
   ) { }
 
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-
-    if (file) {
-      this.convertFileToBase64(file);
-    }
-  }
-
-  convertFileToBase64(file: File): void {
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      this.service.photo = reader.result as string;
-    };
-
-    reader.onerror = (error) => {
-      console.error('Erreur lors de la lecture du fichier', error);
-    };
-
-    reader.readAsDataURL(file);
-  }
-
   onClick(){
     this.loading = true;
-    this.callAPI.saveService(this.service).subscribe(
+    this.callAPI.saveDepense(this.depense).subscribe(
       (data: any) => {
-        this.router.navigate(['/employe/service'])
+        this.router.navigate(['/employe/depense'])
         this.loading=false;
       },
       (error: any) => {

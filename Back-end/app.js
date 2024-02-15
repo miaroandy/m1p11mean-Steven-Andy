@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 var employeRouter = require('./routes/employe');
 var servicesRouter = require('./routes/services');
 var loginRouter = require('./routes/Auth');
+var depensesRouter = require('./routes/depenses');
 var db = require('./utils/db');
 
 var app = express();
@@ -35,6 +36,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/employe', employeRouter);
 app.use('/services', servicesRouter);
+app.use('/depenses', depensesRouter);
 app.use('/login', loginRouter);
 
 module.exports = app;

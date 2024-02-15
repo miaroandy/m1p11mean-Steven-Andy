@@ -1,0 +1,27 @@
+<h1 nz-typography style="text-align: center; color: #1890ff;">Liste depense</h1>
+<div *ngIf="!loading">
+  <nz-table #borderedTable nzBordered nzFooter="{{nbrDepenses}} résultats" nzTitle="Liste des depenses" [nzData]="depenses">
+      <thead>
+          <tr>
+              <th>Salaire</th>
+              <th>Loyer</th>
+              <th>Achat piece</th>
+              <th>Autres depenses</th>
+              <th>Date</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let data of borderedTable.data">
+              <td>{{ data.salaire }}</td>
+              <td>{{ data.loyer }}</td>
+              <td>{{ data.achat_piece }}</td>
+              <td>{{ data.autres_depenses }}</td>
+              <td>{{ data.date }}</td>
+              <td><button type="button" (click)="onClick(data._id)" nz-button nzType="primary">Détails</button></td>
+          </tr>
+      </tbody>
+  </nz-table>
+</div>
+<div *ngIf="loading"  style="text-align: center; margin-top: 100px;">
+  <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+</div>

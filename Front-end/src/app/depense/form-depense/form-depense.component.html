@@ -1,0 +1,33 @@
+<h1 style="text-align: center; color: #1890ff;">Nouveau depense</h1>
+<div nz-row>
+    <div nz-col nzSpan="8"></div>
+
+    <div nz-col nzSpan="8" *ngIf="!loading">
+        <form #depenseForm="ngForm">
+            <input nz-input placeholder="Salaire" [(ngModel)]="depense.salaire" name="salaire" type="number" nzSize="large" />
+            <br />
+            <br />
+            <input nz-input placeholder="Loyer" [(ngModel)]="depense.loyer" name="loyer" type="number" nzSize="large" />
+            <br />
+            <br />
+            <input nz-input placeholder="Achat piece" [(ngModel)]="depense.achat_piece" name="achat_piece" type="number" nzSize="large" />
+            <br />
+            <br />
+            <input nz-input placeholder="Autres depenses" [(ngModel)]="depense.autres_depenses" name="autres_depenses" type="number" nzSize="large" />
+            <br />
+            <br />
+            <input nz-input placeholder="Date" [(ngModel)]="depense.date" name="date" type="date" nzSize="large" />
+            <br />
+            <br />
+            <div>
+                <button (click)="onClick()" style="width: 100%;" type="submit" nz-button nzType="primary" nzSize="large" nzShape="round">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="loading" nz-col nzSpan="8">
+        <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+    </div>
+
+    <div nz-col nzSpan="8"></div>
+
+</div>

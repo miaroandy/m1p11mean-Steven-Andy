@@ -6,6 +6,7 @@ import { Observable,tap,catchError,of } from 'rxjs';
 import { Token } from '../model/Token';
 import { Login } from '../model/Login';
 import { Client } from '../model/Client';
+import { Depense } from '../model/Depense';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ import { Client } from '../model/Client';
 })
 export class CallAPI {
     apiUrl = 'https://salon-beaute-service.onrender.com/';
-    //apiUrl = 'http://localhost:3000/';
+    // apiUrl = 'http://localhost:3000/';
 
     constructor(private http: HttpClient) { }
 
@@ -76,7 +77,7 @@ export class CallAPI {
     }
 
     getServiceById(id: string): Observable<Service> {
-        const url = this.apiUrl + "employe/"+id;
+        const url = this.apiUrl + "services/"+id;
         return this.http.get<Service>(url).pipe(
             tap((response) => this.log(response)),
             catchError((error) => this.handleError(error, []))
@@ -86,5 +87,23 @@ export class CallAPI {
     saveService(service: Service): any{
         const url = this.apiUrl + "services";
         return this.http.post(url, service.toJSON());
+    }
+
+    getAllDepenses(): Observable<Depense[]> {
+        const url = this.apiUrl + "depenses";
+        return this.http.get<Depense[]>(url);
+    }
+
+    getDepenseById(id: string): Observable<Depense> {
+        const url = this.apiUrl + "depenses/"+id;
+        return this.http.get<Depense>(url).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, []))
+        );
+    }
+
+    saveDepense(depense: Depense): any{
+        const url = this.apiUrl + "depenses";
+        return this.http.post(url, depense.toJSON());
     }
 }
