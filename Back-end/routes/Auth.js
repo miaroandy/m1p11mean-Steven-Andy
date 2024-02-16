@@ -65,18 +65,4 @@ function cryptMDP(mdp){
     return hashHex;
 }
 
-
-function verifyToken(req,res,next){
-    const token = req.token;
-
-    jwt.verify(token, secretKey, (err, decoded) => {
-        if (err) {
-            res.status(401).json({message:'Token invalide'});
-        } else {
-            next();
-        }
-    });
-
-}
-
 module.exports = router;

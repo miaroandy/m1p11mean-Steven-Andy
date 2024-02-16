@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Employe } from '../model/Employe';
 import { Service } from '../model/Service';
@@ -12,8 +12,8 @@ import { Client } from '../model/Client';
     providedIn: 'root',
 })
 export class CallAPI {
-    apiUrl = 'https://salon-beaute-service.onrender.com/';
-    //apiUrl = 'http://localhost:3000/';
+    //apiUrl = 'https://salon-beaute-service.onrender.com/';
+    apiUrl = 'http://localhost:3000/';
 
     constructor(private http: HttpClient) { }
 
@@ -56,6 +56,18 @@ export class CallAPI {
     saveEmploye(employe: Employe): Observable<string>{
         const url=this.apiUrl+"employe";
         return this.http.post<string>(url, employe.toJSON()).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, []))
+        );
+    }
+
+    profilUser(id: string | null): Observable<Client>{
+        const url = this.apiUrl + "client/"+id;
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<Client>(url,{headers}).pipe(
             tap((response) => this.log(response)),
             catchError((error) => this.handleError(error, []))
         );

@@ -1,0 +1,51 @@
+<nz-layout class="layout">
+    <div class="site-page-header-ghost-wrapper" style="z-index: 100;">
+        <nz-page-header [nzGhost]="false">
+            <nz-page-header-title>
+                <h1 nz-typography style="color: #1890ff;">Beauty-Full</h1>
+            </nz-page-header-title>
+            <nz-page-header-extra>
+
+
+                <nav class="menu">
+                    <ul>
+                        <li><a routerLink="/home">Accueil</a></li>
+                        <li>
+                            <a href="#">Produits</a>
+                            <ul class="submenu">
+                                <li><a routerLink="/products">Tous les produits</a></li>
+                                <li><a routerLink="/categories">Catégories</a></li>
+                                <li><a routerLink="/brands">Marques</a></li>
+                            </ul>
+                        </li>
+                        <li><a routerLink="/about">À propos</a></li>
+                        <li>
+                            <a href="#">Compte</a>
+                            <ul class="submenu">
+                                <li><a routerLink="/profile">Profil</a></li>
+                                <li><a routerLink="/orders">Commandes</a></li>
+                                <li><a routerLink="/settings">Paramètres</a></li>
+                            </ul>
+                        </li>
+                        <li><a routerLink="/contact">Contact</a></li>
+                    </ul>
+                </nav>
+
+
+
+            </nz-page-header-extra>
+        </nz-page-header>
+    </div>
+    <nz-content>
+        <div class="inner-content">
+            <router-outlet></router-outlet>
+        </div>
+    </nz-content>
+    <nz-footer>
+        <nz-card nzTitle="Copyright 2024">
+            <div nz-card-grid>Rajaofera Maharo Steven</div>
+            <div nz-card-grid>Beauty-Full</div>
+            <div nz-card-grid>Razafiarison Miaro Andy</div>
+        </nz-card>
+    </nz-footer>
+</nz-layout>

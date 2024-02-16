@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 var employeRouter = require('./routes/employe');
 var servicesRouter = require('./routes/services');
 var loginRouter = require('./routes/Auth');
+var clientRouter = require('./routes/client');
 var db = require('./utils/db');
 
 var app = express();
@@ -21,20 +22,11 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) => {
-    const authorizationHeader = req.headers['authorization'];
-
-    if (authorizationHeader && authorizationHeader.startsWith('Bearer ')) {
-        const token = authorizationHeader.split(' ')[1];
-        req.token = token;
-    }
-    next();
-});
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/employe', employeRouter);
 app.use('/services', servicesRouter);
 app.use('/login', loginRouter);
+app.use('/client', clientRouter);
 
 module.exports = app;
