@@ -22,7 +22,7 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'employe',
+    path: 'admin',
     component: TemplateEmployeComponent, 
     children: [
       {
@@ -39,5 +39,5 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '', pathMatch: 'full', redirectTo: '/login/client' }
+  { path: '', pathMatch: 'full', redirectTo: '/client' }
 ];

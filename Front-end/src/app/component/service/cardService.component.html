@@ -1,0 +1,6 @@
+<div class="service-item">
+    <img src="../../../assets/image/test.png" alt="Haircut">
+    <h3>{{service.nom}}</h3>
+    <p>Une durée de {{ service.duree}} minutes au prix de Ar{{service.prix}}</p>
+    <p *ngIf="employe.nom!==''">Employé: <span style="color: #009688;">{{employe.nom}} {{employe.prenom}}</span> </p>
+</div>

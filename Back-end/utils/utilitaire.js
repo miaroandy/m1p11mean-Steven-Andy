@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken');
+const secret_key = process.env.secretKey;
 
 class Utilitaire {
     
@@ -7,13 +9,15 @@ class Utilitaire {
             return res.status(401).json({ message: 'Token manquant' });
         }
 
-        jwt.verify(token, 'votre_clé_secrète', (err, decoded) => {
-            if (err) {
-                return res.status(401).json({ message: 'Token invalide' });
-            }
+        try {
+            const decoded = jwt.verify(token, secret_key);
             req.user = decoded;
             next();
-        });
+        } catch (error) {
+            return res.status(401).json({ message: 'Token invalide' });
+        }
+
+        
     }
 }
 

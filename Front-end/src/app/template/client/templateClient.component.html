@@ -5,34 +5,20 @@
                 <h1 nz-typography style="color: #fff;">Beauty-Full</h1>
             </nz-page-header-title>
             <nz-page-header-extra>
-
-
                 <nav class="menu">
                     <ul>
-                        <li><a routerLink="/home">Accueil</a></li>
+                        <li><a (click)="navigate('/client')">Accueil</a></li>
+                        <li><a (click)="navigate('/client/profil')">Mon profil</a></li>
                         <li>
-                            <a href="#">Produits</a>
+                            <a href="#">Se connecter</a>
                             <ul class="submenu">
-                                <li><a routerLink="/products">Tous les produits</a></li>
-                                <li><a routerLink="/categories">Catégories</a></li>
-                                <li><a routerLink="/brands">Marques</a></li>
+                                <li><a (click)="navigate('login/client')">Client</a></li>
+                                <li><a (click)="navigate('login/employe')">Employe</a></li>
+                                <li><a (click)="navigate('login/admin')">Administrateur</a></li>
                             </ul>
                         </li>
-                        <li><a routerLink="/about">À propos</a></li>
-                        <li>
-                            <a href="#">Compte</a>
-                            <ul class="submenu">
-                                <li><a routerLink="/profile">Profil</a></li>
-                                <li><a routerLink="/orders">Commandes</a></li>
-                                <li><a routerLink="/settings">Paramètres</a></li>
-                            </ul>
-                        </li>
-                        <li><a routerLink="/contact">Contact</a></li>
                     </ul>
                 </nav>
-
-
-
             </nz-page-header-extra>
         </nz-page-header>
     </div>

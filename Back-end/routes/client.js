@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     res.json(services);
 });
 
-router.get('/:id', Utilitaire.verifyToken ,getClient, (req, res) => {
+router.get('/:id' ,getClient, (req, res) => {
     res.json(res.client);
 });
 

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Employe } from '../model/Employe';
 import { Service } from '../model/Service';
@@ -6,6 +6,7 @@ import { Observable,tap,catchError,of } from 'rxjs';
 import { Token } from '../model/Token';
 import { Login } from '../model/Login';
 import { Client } from '../model/Client';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -15,7 +16,8 @@ export class CallAPI {
     //apiUrl = 'https://salon-beaute-service.onrender.com/';
     apiUrl = 'http://localhost:3000/';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient,
+        private router: Router){ }
 
     login(user: Login): Observable<Token>{
         const url = this.apiUrl + "login";
@@ -77,8 +79,16 @@ export class CallAPI {
         console.table(response);
     }
 
-    private handleError(error: Error, errorValue: any) {
-        console.error(error);
+    private handleError(error: HttpErrorResponse, errorValue: any) {
+        if (error.error instanceof ErrorEvent) {
+            console.error('Une erreur s\'est produite :', error.error.message);
+        } else {
+            if(error.status==401){
+                this.router.navigate(['/login/client']);
+            }
+            console.error('Une erreur s\'est produite :', error.error.message);
+        }
+
         return of(errorValue);
     }
 

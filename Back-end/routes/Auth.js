@@ -55,6 +55,9 @@ async function login(req,res) {
     else if (req.body.role==='employe'){
         result= await Employe.find(login);
     }
+    else if (req.body.role === 'admin') {
+        result = await Employe.find(login);
+    }
     return result;
 }
 
