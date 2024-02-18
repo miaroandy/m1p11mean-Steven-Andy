@@ -9,9 +9,7 @@ import { ProfilComponent } from './profil/profil.component';
 export const routes: Routes = [
   { path: 'login/:role', component: LoginComponent },
   { path: 'inscription', component: InscriptionComponent },
-  {
-    path: 'employe',component: TemplateEmployeComponent,
-  }
+  {path: 'employe',component: TemplateEmployeComponent},
   {
     path: 'client',component: TemplateClientComponent,
     children: [
