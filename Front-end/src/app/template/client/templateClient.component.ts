@@ -13,7 +13,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
     standalone: true,
     imports: [RouterOutlet, NzCardModule, NzTypographyModule, NzLayoutModule, NzPageHeaderModule, NzMenuModule, NzIconModule],
     templateUrl: './templateClient.component.html',
-    styleUrls: ['./templateCLient.component.css']
+    styleUrls: ['./templateClient.component.css']
 })
 export class TemplateClientComponent {
 
