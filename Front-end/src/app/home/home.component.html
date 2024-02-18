@@ -1,0 +1,19 @@
+<div class="hero-section">
+    <div class="hero-content">
+        <h1>Bienvenue chez Beauty-Full</h1>
+        <p>Votre destination beauté pour un look sensationnel</p>
+        <a href="/client#service" class="btn btn-primary">Découvrez nos services</a>
+    </div>
+</div>
+
+<div class="services-section">
+    <div class="container">
+        <h2 id="service">Nos Services</h2>
+        <div *ngIf="!loading" class="services-grid">
+            <div *ngFor="let item of services">
+                <card-service [service]="item" />
+            </div>
+        </div>
+        <spinner-root [loading]="loading"/>
+    </div>
+</div>

@@ -55,6 +55,9 @@ async function login(req,res) {
     else if (req.body.role==='employe'){
         result= await Employe.find(login);
     }
+    else if (req.body.role === 'admin') {
+        result = await Employe.find(login);
+    }
     return result;
 }
 
@@ -63,20 +66,6 @@ function cryptMDP(mdp){
     hash.update(mdp);
     const hashHex = hash.digest('hex');
     return hashHex;
-}
-
-
-function verifyToken(req,res,next){
-    const token = req.token;
-
-    jwt.verify(token, secretKey, (err, decoded) => {
-        if (err) {
-            res.status(401).json({message:'Token invalide'});
-        } else {
-            next();
-        }
-    });
-
 }
 
 module.exports = router;

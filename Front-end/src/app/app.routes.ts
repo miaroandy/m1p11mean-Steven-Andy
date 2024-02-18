@@ -2,13 +2,30 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { TemplateEmployeComponent } from './template/employe/templateEmploye.component';
 import { InscriptionComponent } from './login/inscription.component';
+import { HomeComponent } from './home/home.component';
+import { TemplateClientComponent } from './template/client/templateClient.component';
+import { ProfilComponent } from './profil/profil.component';
 
 export const routes: Routes = [
   { path: 'login/:role', component: LoginComponent },
   { path: 'inscription', component: InscriptionComponent },
   {
-    path: 'employe',
-    component: TemplateEmployeComponent,
+    path: 'employe',component: TemplateEmployeComponent,
+  }
+  {
+    path: 'client',component: TemplateClientComponent,
+    children: [
+      {
+        path: 'profil', component : ProfilComponent
+      },
+      {
+        path: '', component: HomeComponent
+      }
+    ],
+  },
+  {
+    path: 'admin',
+    component: TemplateEmployeComponent, 
     children: [
       {
         path: 'service',
@@ -28,5 +45,5 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '', pathMatch: 'full', redirectTo: '/login/client' }
+  { path: '', pathMatch: 'full', redirectTo: '/client' }
 ];

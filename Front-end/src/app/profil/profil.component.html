@@ -1,0 +1,38 @@
+<div class="profile">
+    <div class="profile-header">
+        <h1>Profil Utilisateur</h1>
+        <p>Bienvenue sur votre profil</p>
+    </div>
+    <div class="profile-info">
+        <h2>Information personnelle</h2>
+        <nz-descriptions nzTitle=" " *ngIf="!loading">
+            <nz-descriptions-item nzTitle="Nom">{{client.nom }} {{client.prenom }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="E-mail">{{client.email}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Numero">{{client.numero}}</nz-descriptions-item>
+        </nz-descriptions>
+        <spinner-root [loading]="loading"/>
+    </div>
+    <div class="profile-tabs">
+        <ul>
+            <li (click)="onClick(true)"> Favoris </li>
+            <li (click)="onClick(false)"> Historique des RDV </li>
+        </ul>
+    </div>
+    <div class="profile-content">
+        <div *ngIf="favoris" class="profile-favorites">
+            <h2>Services Favoris</h2>
+            <div *ngIf="!loading" class="services-grid">
+                <div *ngFor="let item of client.preferences">
+                    <card-service  [service]="item.service" [employe]="item.employe"/>
+                </div>
+            </div>
+            <spinner-root [loading]="loading" />
+        </div>
+        <div *ngIf="!favoris" class="profile-appointments">
+            <h2>Historique des RDV</h2>
+            <ul>
+                <li ></li>
+            </ul>
+        </div>
+    </div>
+</div>
