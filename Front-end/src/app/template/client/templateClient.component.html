@@ -1,0 +1,37 @@
+<nz-layout class="layout">
+    <div class="site-page-header-ghost-wrapper" style="z-index: 100;">
+        <nz-page-header [nzGhost]="false">
+            <nz-page-header-title>
+                <h1 nz-typography style="color: #fff;">Beauty-Full</h1>
+            </nz-page-header-title>
+            <nz-page-header-extra>
+                <nav class="menu">
+                    <ul>
+                        <li><a (click)="navigate('/client')">Accueil</a></li>
+                        <li><a (click)="navigate('/client/profil')">Mon profil</a></li>
+                        <li>
+                            <a href="#">Se connecter</a>
+                            <ul class="submenu">
+                                <li><a (click)="navigate('login/client')">Client</a></li>
+                                <li><a (click)="navigate('login/employe')">Employe</a></li>
+                                <li><a (click)="navigate('login/admin')">Administrateur</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </nz-page-header-extra>
+        </nz-page-header>
+    </div>
+    <nz-content>
+        <div class="inner-content">
+            <router-outlet></router-outlet>
+        </div>
+    </nz-content>
+    <nz-footer>
+        <nz-card nzTitle="Copyright 2024">
+            <div nz-card-grid>Rajaofera Maharo Steven</div>
+            <div nz-card-grid>Beauty-Full</div>
+            <div nz-card-grid>Razafiarison Miaro Andy</div>
+        </nz-card>
+    </nz-footer>
+</nz-layout>

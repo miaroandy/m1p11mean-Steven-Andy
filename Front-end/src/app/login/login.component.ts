@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit{
     }
 
     correct(){
-        this.router.navigate(['/employe']);
+        this.router.navigate(['/'+this.login.role]);
     }
 
 
