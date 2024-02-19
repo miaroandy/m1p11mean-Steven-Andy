@@ -3,6 +3,7 @@ var router = express.Router();
 const jwt = require('jsonwebtoken');
 const Employe = require('../models/Employe');
 const Client = require('../models/Client');
+const Manager = require('../models/Manager');
 const crypto = require('crypto');
 const secretKey = process.env.secretKey;
 
@@ -56,7 +57,7 @@ async function login(req,res) {
         result= await Employe.find(login);
     }
     else if (req.body.role === 'admin') {
-        result = await Employe.find(login);
+        result = await Manager.find(login);
     }
     return result;
 }
