@@ -4,7 +4,8 @@ const secret_key = process.env.secretKey;
 class Utilitaire {
     
     static verifyToken(req, res, next) {
-        const token = req.headers.authorization;
+        const bearer = req.headers.authorization;
+        const token= bearer.split(' ')[1];
         if (!token) {
             return res.status(401).json({ message: 'Token manquant' });
         }
