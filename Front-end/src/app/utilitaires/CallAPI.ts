@@ -8,6 +8,7 @@ import { Login } from '../model/Login';
 import { Client } from '../model/Client';
 import { Depense } from '../model/Depense';
 import { Router } from '@angular/router';
+import { RendezVous } from '../model/RendezVous';
 
 
 @Injectable({
@@ -19,6 +20,14 @@ export class CallAPI {
 
     constructor(private http: HttpClient,
         private router: Router){ }
+
+    getHistoriqueRDV():Observable<RendezVous[]>{
+        const url = this.apiUrl + "rdv/historique/" + localStorage.getItem('identifiant');
+        return this.http.get<RendezVous[]>(url).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, []))
+        );
+    }
 
     login(user: Login): Observable<Token>{
         const url = this.apiUrl + "login";
@@ -64,8 +73,8 @@ export class CallAPI {
         );
     }
 
-    profilUser(id: string | null): Observable<Client>{
-        const url = this.apiUrl + "client/"+id;
+    profilUser(): Observable<Client>{
+        const url = this.apiUrl + "client/" + localStorage.getItem('identifiant');
         const token = localStorage.getItem('token');
         const headers = new HttpHeaders({
             'Authorization': `Bearer ${token}`
