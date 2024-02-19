@@ -5,6 +5,7 @@ import { InscriptionComponent } from './login/inscription.component';
 import { HomeComponent } from './home/home.component';
 import { TemplateClientComponent } from './template/client/templateClient.component';
 import { ProfilComponent } from './profil/profil.component';
+import { TemplateAdminComponent } from './template/admin/templateAdmin.component';
 
 export const routes: Routes = [
   { path: 'login/:role', component: LoginComponent },
@@ -23,7 +24,7 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    component: TemplateEmployeComponent, 
+    component: TemplateAdminComponent, 
     children: [
       {
         path: 'service',
