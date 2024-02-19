@@ -30,9 +30,9 @@
         </div>
         <div *ngIf="!favoris" class="profile-appointments">
             <h2>Historique des RDV</h2>
-            <ul>
-                <li ></li>
-            </ul>
+            <nz-timeline>
+                <nz-timeline-item nzColor="blue" nzLabel="{{item.date}}" *ngFor="let item of rdv">{{item.service.nom}} par {{item.employe.nom}}  {{item.employe.prenom}}</nz-timeline-item>
+            </nz-timeline>
         </div>
     </div>
 </div>
