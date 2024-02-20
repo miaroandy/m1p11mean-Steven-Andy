@@ -1,0 +1,18 @@
+<div *ngIf="!loading" class="service-card">
+    <div class="service-details">
+        <h2>{{service.nom}}</h2>
+        <p *ngIf="service.offres_speciales[0]">Une duree de {{ service.duree}} minutes avec une réduction de <strong>{{service.offres_speciales[0].reduction *100}}%</strong> </p>
+        <p *ngIf="service.offres_speciales[0]">Au prix de <strong>{{ service.prix-(service.prix *service.offres_speciales[0].reduction )}} Ar</strong> au lieu de {{service.prix}} Ar</p>
+        
+        <p *ngIf="!service.offres_speciales[0]">Une durée de {{ service.duree}} minutes </p>
+        <p *ngIf="!service.offres_speciales[0]">A partir de <strong>{{service.prix}} Ar</strong></p>
+        <div class="service-actions">
+            <button class="btn">Réserver maintenant</button>
+            <button class="btn btn-outline">Ajouter aux favoris</button>
+        </div>
+    </div>
+    <div class="service-image">
+        <img src="{{service.photo}}" alt="{{service.nom}}">
+    </div>
+</div>
+<spinner-root [loading]="loading" />

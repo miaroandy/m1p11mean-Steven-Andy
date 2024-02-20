@@ -39,5 +39,9 @@ export class ProfilComponent implements OnInit {
     onClick(status: boolean){
         this.favoris=status;
     }
+
+    navigate(id: string) {
+        this.router.navigate(['/client/service', id]);
+    }
     
 }

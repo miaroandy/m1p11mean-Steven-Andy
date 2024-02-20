@@ -22,7 +22,7 @@
         <div *ngIf="favoris" class="profile-favorites">
             <h2>Services Favoris</h2>
             <div *ngIf="!loading" class="services-grid">
-                <div *ngFor="let item of client.preferences">
+                <div *ngFor="let item of client.preferences" (click)="navigate(item.service._id)">
                     <card-service  [service]="item.service" [employe]="item.employe"/>
                 </div>
             </div>

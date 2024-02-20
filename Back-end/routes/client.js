@@ -25,6 +25,10 @@ async function getClient(req, res, next) {
     } catch (err) {
         return res.status(500).json({ message: err.message });
     }
+    const date=new Date();
+    client.preferences.forEach(element => {
+        element.service.offres_speciales = element.service.offres_speciales.filter(item => (item.datedebut <= date && item.datefin >= date));
+    });
     res.client = client;
     next();
 }

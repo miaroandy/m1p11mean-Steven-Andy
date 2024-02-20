@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const Service = require('../models/Service');
 const secret_key = process.env.secretKey;
 
 class Utilitaire {
@@ -19,6 +20,21 @@ class Utilitaire {
         }
 
         
+    }
+
+    static async getOffresSpecial(date){
+        const offres = await Service.find({ 
+            'offres_speciales': {
+                $elemMatch: {
+                    datedebut: { $lte: date }, 
+                    datefin: { $gte: date }    
+                }
+            }
+        });
+        offres.forEach(element => {
+            element.offres_speciales= element.offres_speciales.filter(item => (item.datedebut <= date && item.datefin>=date));
+        });
+        return offres;
     }
 }
 
