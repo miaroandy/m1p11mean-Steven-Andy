@@ -1,6 +1,8 @@
+import { Manager } from "./Manager";
+
 export class Depense {
     _id: string;
-    // manager: ;
+    manager: Manager;
     salaire: number;
     loyer: number;
     achat_piece: number;
@@ -9,7 +11,7 @@ export class Depense {
 
     constructor() {
         this._id = '';
-        // this.manager = ;
+        this.manager = new Manager;
         this.salaire = 0;
         this.loyer = 0;
         this.achat_piece = 0;
