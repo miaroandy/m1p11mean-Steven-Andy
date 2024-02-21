@@ -22,7 +22,8 @@
         <div *ngIf="favoris" class="profile-favorites">
             <h2>Services Favoris</h2>
             <div *ngIf="!loading" class="services-grid">
-                <div *ngFor="let item of client.preferences">
+                <div *ngFor="let item of client.preferences" (click)="navigate(item.service._id)">
+                    <span class="delete" nz-icon nzType="close" nzTheme="outline" (click)="deleteFavoris(item.service._id,item.employe._id)"></span>
                     <card-service  [service]="item.service" [employe]="item.employe"/>
                 </div>
             </div>
@@ -31,7 +32,7 @@
         <div *ngIf="!favoris" class="profile-appointments">
             <h2>Historique des RDV</h2>
             <nz-timeline>
-                <nz-timeline-item nzColor="blue" nzLabel="{{item.date}}" *ngFor="let item of rdv">{{item.service.nom}} par {{item.employe.nom}}  {{item.employe.prenom}}</nz-timeline-item>
+                <nz-timeline-item nzColor="blue" nzLabel="{{ item.date | date: 'dd/MM/yyyy HH:mm:ss' }}" *ngFor="let item of rdv">{{item.service.nom}} par {{item.employe.nom}}  {{item.employe.prenom}}</nz-timeline-item>
             </nz-timeline>
         </div>
     </div>

@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     res.json(services);
 });
 
-router.get('/:id' ,getClient, (req, res) => {
+router.get('/:id' ,Utilitaire.verifyToken,getClient, (req, res) => {
     res.json(res.client);
 });
 
@@ -25,6 +25,10 @@ async function getClient(req, res, next) {
     } catch (err) {
         return res.status(500).json({ message: err.message });
     }
+    const date=new Date();
+    client.preferences.forEach(element => {
+        element.service.offres_speciales = element.service.offres_speciales.filter(item => (item.datedebut <= date && item.datefin >= date));
+    });
     res.client = client;
     next();
 }

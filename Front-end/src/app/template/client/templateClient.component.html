@@ -9,14 +9,8 @@
                     <ul>
                         <li><a (click)="navigate('/client')">Accueil</a></li>
                         <li><a (click)="navigate('/client/profil')">Mon profil</a></li>
-                        <li>
-                            <a href="#">Se connecter</a>
-                            <ul class="submenu">
-                                <li><a (click)="navigate('login/client')">Client</a></li>
-                                <li><a (click)="navigate('login/employe')">Employe</a></li>
-                                <li><a (click)="navigate('login/admin')">Administrateur</a></li>
-                            </ul>
-                        </li>
+                        <li *ngIf="!estConnecte"><a (click)="navigate('login/client')">Se connecter</a></li>
+                        <li *ngIf="estConnecte"><a (click)="seDeconnecter()">Se déconnecter</a></li>
                     </ul>
                 </nav>
             </nz-page-header-extra>

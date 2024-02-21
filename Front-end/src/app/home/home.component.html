@@ -1,8 +1,27 @@
-<div class="hero-section">
-    <div class="hero-content">
-        <h1>Bienvenue chez Beauty-Full</h1>
-        <p>Votre destination beauté pour un look sensationnel</p>
-        <a href="/client#service" class="btn btn-primary">Découvrez nos services</a>
+<div class="slider-content">
+    <div class="slider">
+        <div class="slides">
+            <div id="slide-1">
+                <img src="../../assets/image/test.png" alt="">
+                <div class="carousel-caption">
+                    <div class="hero-content">
+                        <h1>Bienvenue chez Beauty-Full</h1>
+                        <p style="color: #009688;">Votre destination beauté pour un look sensationnel</p>
+                        <a href="/client#service" class="btn btn-primary">Découvrez nos services</a>
+                    </div>
+                </div>
+            </div>
+            <div id="slide-1">
+                <img src="../../assets/image/test.png" alt="">
+                <div class="carousel-caption">
+                    <div class="hero-content">
+                        <h1>Chez Beauty-Full</h1>
+                        <p style="color: #009688;">Ne manquez pas cette opportunité de profiter d'avantages exclusifs et de promotions exceptionnelles !</p>
+                        <a href="/client#special" class="btn btn-primary">Nos offres spéciales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -10,10 +29,22 @@
     <div class="container">
         <h2 id="service">Nos Services</h2>
         <div *ngIf="!loading" class="services-grid">
-            <div *ngFor="let item of services">
+            <div *ngFor="let item of services" (click)="navigate(item._id)">
                 <card-service [service]="item" />
             </div>
         </div>
         <spinner-root [loading]="loading"/>
+    </div>
+</div>
+
+<div class="services-section">
+    <div class="container">
+        <h2 id="special">Nos Offres Spéciales</h2>
+        <div *ngIf="!loadingOffres" class="services-grid" >
+            <div *ngFor="let item of offresSpecial" (click)="navigate(item._id)">
+                <card-service [service]="item" />
+            </div>
+        </div>
+        <spinner-root [loading]="loadingOffres" />
     </div>
 </div>

@@ -1,0 +1,92 @@
+.service-card {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    align-items: center;
+}
+
+.service-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.service-details {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+strong {
+    color: #009688;
+}
+
+.service-details h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #009688;
+}
+
+.service-details p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.service-actions .btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #009688;
+    color: #fff;
+    border-color: #fff;
+}
+
+.service-actions .btn:hover {
+    padding: 10px 20px;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+    color: #009688;
+    background-color: transparent;
+    border: 1px solid #009688;
+}
+
+.service-actions .btn-outline {
+    background-color: transparent;
+    border: 1px solid #007bff;
+    color: #007bff;
+}
+
+.service-actions .btn-outline:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.service-image {
+    flex: 1;
+}
+
+.service-image img {
+    width: 100%;
+    height: auto;
+}
+
+.title{
+    text-align: center;
+    color: #fff;
+    background-color: #009688;
+}
+
+[nz-radio] {
+    display: block;
+    height: 32px;
+    line-height: 32px;
+}
+
+input {
+    width: 100px;
+    margin-left: 10px;
+}

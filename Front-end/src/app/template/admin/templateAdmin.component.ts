@@ -4,7 +4,7 @@ import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 
@@ -16,5 +16,11 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
     styleUrls: ['./templateAdmin.component.css']
 })
 export class TemplateAdminComponent {
+
+    constructor(private router: Router){}
+
+    navigate(lien:string){
+        this.router.navigate([lien]);
+    }
 
 }

@@ -15,8 +15,8 @@ import { RendezVous } from '../model/RendezVous';
     providedIn: 'root',
 })
 export class CallAPI {
-    apiUrl = 'https://salon-beaute-service.onrender.com/';
-    //apiUrl = 'http://localhost:3000/';
+    //apiUrl = 'https://salon-beaute-service.onrender.com/';
+    apiUrl = 'http://localhost:3000/';
 
     constructor(private http: HttpClient,
         private router: Router){ }
@@ -29,6 +29,23 @@ export class CallAPI {
         );
     }
 
+    getFicheServiceSpecial(id: string): Observable<Service> {
+        const url = this.apiUrl + "services/"+id+"/special";
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<Service>(url,{headers}).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, []))
+        );
+    }
+
+    offresSpeciales(): Observable<Service[]> {
+        const url = this.apiUrl + "services/offreSpecial";
+        return this.http.get<Service[]>(url);
+    }
+
     login(user: Login): Observable<Token>{
         const url = this.apiUrl + "login";
         return this.http.post<Token>(url,user).pipe(
@@ -37,6 +54,30 @@ export class CallAPI {
                 localStorage.setItem('identifiant',response.identifiant);
                 localStorage.setItem('role',response.role);
             }),
+            catchError((error) => this.handleError(error, []))
+        );
+    }
+
+    ajoutFavoris(favoris:any): any{
+        const url = this.apiUrl + "users/favoris";
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.post(url,favoris,{headers}).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, []))
+        );
+    }
+
+    deleteFavoris(favoris: any): any {
+        const url = this.apiUrl + "users/favoris/remove";
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.post(url, favoris, { headers }).pipe(
+            tap((response) => this.log(response)),
             catchError((error) => this.handleError(error, []))
         );
     }
@@ -104,6 +145,11 @@ export class CallAPI {
 
     getAllServices(): Observable<Service[]> {
         const url = this.apiUrl + "services";
+        return this.http.get<Service[]>(url);
+    }
+
+    getAllServicesHome(): Observable<Service[]> {
+        const url = this.apiUrl + "services/home";
         return this.http.get<Service[]>(url);
     }
 

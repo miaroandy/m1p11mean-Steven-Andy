@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Depense } from '../../model/Depense';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { NgFor,NgIf } from '@angular/common';
+import { CommonModule, NgFor,NgIf } from '@angular/common';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { CallAPI } from '../../utilitaires/CallAPI';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-list-depense',
   standalone: true,
-  imports: [NzTableModule, NzTypographyModule, NgFor, NgIf, NzSpinModule, NzButtonModule],
+  imports: [NzTableModule, NzTypographyModule, NgFor, NgIf, NzSpinModule, NzButtonModule,CommonModule],
   templateUrl: './list-depense.component.html',
   styleUrl: './list-depense.component.css',
   providers: []

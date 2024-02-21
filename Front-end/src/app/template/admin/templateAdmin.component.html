@@ -2,32 +2,35 @@
     <div class="site-page-header-ghost-wrapper" style="z-index: 100;">
         <nz-page-header [nzGhost]="false">
             <nz-page-header-title>
-                <h1 nz-typography style="color: #1890ff;">Beauty-Full</h1>
+                <h1 nz-typography style="color: #fff;">Beauty-Full</h1>
             </nz-page-header-title>
             <nz-page-header-extra>
 
 
                 <nav class="menu">
                     <ul>
-                        <li><a routerLink="/home">Accueil</a></li>
+                        <li><a (click)="navigate('/admin')">Accueil</a></li>
                         <li>
-                            <a href="#">Produits</a>
+                            <a href="#">Services</a>
                             <ul class="submenu">
-                                <li><a routerLink="/products">Tous les produits</a></li>
-                                <li><a routerLink="/categories">Catégories</a></li>
-                                <li><a routerLink="/brands">Marques</a></li>
+                                <li><a (click)="navigate('/admin/service')">Liste services</a></li>
+                                <li><a (click)="navigate('/admin/service/add')">Ajout service</a></li>
                             </ul>
                         </li>
-                        <li><a routerLink="/about">À propos</a></li>
                         <li>
-                            <a href="#">Compte</a>
+                            <a href="#">Employés</a>
                             <ul class="submenu">
-                                <li><a routerLink="/profile">Profil</a></li>
-                                <li><a routerLink="/orders">Commandes</a></li>
-                                <li><a routerLink="/settings">Paramètres</a></li>
+                                <li><a (click)="navigate('/admin/employe')">Liste employés</a></li>
+                                <li><a (click)="navigate('/admin/employe/add')">Ajout employé </a></li>
                             </ul>
                         </li>
-                        <li><a routerLink="/contact">Contact</a></li>
+                        <li>
+                            <a href="#">Dépenses</a>
+                            <ul class="submenu">
+                                <li><a (click)="navigate('/admin/depense')">Liste dépenses</a></li>
+                                <li><a (click)="navigate('/admin/depense/add')">Ajout dépense </a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
 
