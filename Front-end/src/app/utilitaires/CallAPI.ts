@@ -15,8 +15,8 @@ import { RendezVous } from '../model/RendezVous';
     providedIn: 'root',
 })
 export class CallAPI {
-    apiUrl = 'https://salon-beaute-service.onrender.com/';
-    //apiUrl = 'http://localhost:3000/';
+    //apiUrl = 'https://salon-beaute-service.onrender.com/';
+    apiUrl = 'http://localhost:3000/';
 
     constructor(private http: HttpClient,
         private router: Router){ }
@@ -68,7 +68,18 @@ export class CallAPI {
             tap((response) => this.log(response)),
             catchError((error) => this.handleError(error, []))
         );
+    }
 
+    deleteFavoris(favoris: any): any {
+        const url = this.apiUrl + "users/favoris/remove";
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.post(url, favoris, { headers }).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, []))
+        );
     }
 
     inscription(client: Client): Observable<Client>{

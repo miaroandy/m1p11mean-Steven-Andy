@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CallAPI } from '../utilitaires/CallAPI';
 import { SpinnerComponent } from '../component/spinner/spinner.component';
 import { NgFor, NgIf } from '@angular/common';
@@ -9,12 +9,13 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { Employe } from '../model/Employe';
 import { FormsModule } from '@angular/forms';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
     selector: 'home-service',
     templateUrl: './home-service.component.html',
     standalone: true,
-    imports: [NgFor, NgIf, SpinnerComponent, NzTypographyModule, NzModalModule, NzRadioModule,FormsModule],
+    imports: [NgFor, NgIf, SpinnerComponent, NzTypographyModule, NzModalModule, NzRadioModule, FormsModule, NzButtonModule],
     styleUrls: ['./home-service.component.css']
 })
 export class HomeServiceComponent implements OnInit {

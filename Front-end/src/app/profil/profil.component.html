@@ -23,6 +23,7 @@
             <h2>Services Favoris</h2>
             <div *ngIf="!loading" class="services-grid">
                 <div *ngFor="let item of client.preferences" (click)="navigate(item.service._id)">
+                    <span class="delete" nz-icon nzType="close" nzTheme="outline" (click)="deleteFavoris(item.service._id,item.employe._id)"></span>
                     <card-service  [service]="item.service" [employe]="item.employe"/>
                 </div>
             </div>
