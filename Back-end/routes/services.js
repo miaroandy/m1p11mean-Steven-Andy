@@ -32,7 +32,7 @@ router.get('/', async (req, res) => {
   res.json(services);
 });
 
-router.get('/:id/special', getService, (req, res) => {
+router.get('/:id/special', Utilitaire.verifyToken ,getService, (req, res) => {
   const date=new Date();
   res.service.offres_speciales = res.service.offres_speciales.filter(item => (item.datedebut <= date && item.datefin >= date));
   res.json(res.service);

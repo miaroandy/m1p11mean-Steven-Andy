@@ -1,3 +1,4 @@
+<h2 class="title" nz-typography>{{service.nom}}</h2>
 <div *ngIf="!loading" class="service-card">
     <div class="service-details">
         <h2>{{service.nom}}</h2>
@@ -8,11 +9,22 @@
         <p *ngIf="!service.offres_speciales[0]">A partir de <strong>{{service.prix}} Ar</strong></p>
         <div class="service-actions">
             <button class="btn">Réserver maintenant</button>
-            <button class="btn btn-outline">Ajouter aux favoris</button>
+            <button class="btn btn-outline" (click)="showModal()">Ajouter aux favoris</button>
         </div>
     </div>
     <div class="service-image">
         <img src="{{service.photo}}" alt="{{service.nom}}">
     </div>
 </div>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Avec quelle employée préférer vous ce service ?" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
+    [nzOkLoading]="isOkLoading">
+    <div *nzModalContent>
+        <nz-radio-group *ngIf="!loadingEmp" [(ngModel)]="radioValue">
+            <label *ngFor="let item of employes" nz-radio nzValue="{{item._id}}">{{item.nom}} {{item.prenom}}</label>
+        </nz-radio-group>
+        <spinner-root [loading]="loadingEmp" />
+    </div>
+</nz-modal>
+
 <spinner-root [loading]="loading" />

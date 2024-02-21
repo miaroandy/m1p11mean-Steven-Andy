@@ -6,11 +6,11 @@ class Utilitaire {
     
     static verifyToken(req, res, next) {
         const bearer = req.headers.authorization;
-        const token= bearer.split(' ')[1];
-        if (!token) {
+        if (!bearer) {
             return res.status(401).json({ message: 'Token manquant' });
         }
-
+        const token= bearer.split(' ')[1];
+        
         try {
             const decoded = jwt.verify(token, secret_key);
             req.user = decoded;

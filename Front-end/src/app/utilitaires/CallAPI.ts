@@ -31,7 +31,14 @@ export class CallAPI {
 
     getFicheServiceSpecial(id: string): Observable<Service> {
         const url = this.apiUrl + "services/"+id+"/special";
-        return this.http.get<Service>(url);
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<Service>(url,{headers}).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, []))
+        );
     }
 
     offresSpeciales(): Observable<Service[]> {
@@ -49,6 +56,19 @@ export class CallAPI {
             }),
             catchError((error) => this.handleError(error, []))
         );
+    }
+
+    ajoutFavoris(favoris:any): any{
+        const url = this.apiUrl + "users/favoris";
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.post(url,favoris,{headers}).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, []))
+        );
+
     }
 
     inscription(client: Client): Observable<Client>{
