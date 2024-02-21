@@ -34,4 +34,40 @@ router.get('/temps-travail', async (req, res) => {
   }
 });
 
+// Le nombre de réservations par jour
+router.get('/reservations-jour', async (req, res) => {
+  try {
+    const result = await RendezVous.aggregate([
+      {
+        $group: {
+          _id: { $dayOfMonth: "$date" },
+          nombre_reservations: { $sum: 1 }
+        }
+      }
+    ]);
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erreur lors de la récupération des réservations par jour.');
+  }
+});
+
+// Le nombre de réservations par mois
+router.get('/reservations-mois', async (req, res) => {
+  try {
+    const result = await RendezVous.aggregate([
+      {
+        $group: {
+          _id: { $month: "$date" },
+          nombre_reservations: { $sum: 1 }
+        }
+      }
+    ]);
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erreur lors de la récupération des réservations par mois.');
+  }
+});
+
 module.exports = router;
