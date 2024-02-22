@@ -55,6 +55,8 @@ class Utilitaire {
                 if(travail.jour===jourSemaine){
                     const datedebut=Utilitaire.stringToTime(travail.heure_debut);
                     const datefin = Utilitaire.stringToTime(travail.heure_fin);
+                    console.log("travail");
+                    console.log(datedebut+" "+datefin+" "+datecompare);
                     if(!(datedebut<=datecompare && datefin>=datecompare)){
                         emp=emp.filter(item => item._id !== element._id);
                     }
@@ -65,17 +67,20 @@ class Utilitaire {
     }
 
     static async employeLibre(dateString){
-        const date = new Date(dateString);
+        let date = new Date(dateString);
         let emp=await Utilitaire.employeQuiTravail(date);
-        const rdv = await RendezVous.find({ employe: { $in: emp } }).populate([
-            { path: 'service' }
-        ]);
+        const rdv = await RendezVous.find({ employe: { $in: emp } }).populate({ 
+            path: 'service' ,
+            select: '-photo'
+        });
+        //date.setHours(date.getHours() + 3);
         rdv.forEach(element => {
-            const datefin =new Date(element.date.setMinutes(element.date.getMinutes()+element.service.duree));
-            console.log(datefin);
-            console.log(element.date)
-            if(element.date<=date && datefin>=date){
-                emp = emp.filter(item => item._id !== element.employe);
+            let datefin =new Date(element.date.toString());
+            datefin.setMinutes(element.date.getMinutes()+element.service.duree);
+            console.log("libre");
+            console.log(element.date + " " + datefin + " " + date);
+            if(element.date<=date && datefin>date){
+                emp = emp.filter(item => item._id.toString() !== element.employe.toString());
             }
         })
         return emp;

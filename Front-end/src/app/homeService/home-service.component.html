@@ -8,8 +8,8 @@
         <p *ngIf="!service.offres_speciales[0]">Une durée de {{ service.duree}} minutes </p>
         <p *ngIf="!service.offres_speciales[0]">A partir de <strong>{{service.prix}} Ar</strong></p>
         <div class="service-actions">
-            <button class="btn">Réserver maintenant</button>
-            <button class="btn btn-outline" (click)="showModal()">Ajouter aux favoris</button>
+            <button class="btn" (click)="showModal(2)">Réserver maintenant</button>
+            <button class="btn btn-outline" (click)="showModal(1)">Ajouter aux favoris</button>
         </div>
     </div>
     <div class="service-image">
@@ -17,13 +17,28 @@
     </div>
 </div>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Avec quelle employée préférer vous ce service ?" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Avec quelle employée préférer vous ce service ?" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk(1)"
     [nzOkLoading]="isOkLoading">
     <div *nzModalContent>
         <nz-radio-group *ngIf="!loadingEmp" [(ngModel)]="radioValue">
             <label *ngFor="let item of employes" nz-radio nzValue="{{item._id}}">{{item.nom}} {{item.prenom}}</label>
         </nz-radio-group>
         <spinner-root [loading]="loadingEmp" />
+    </div>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isVisibleRdv" nzTitle="Prendre un rendez-vous"
+    (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk(2)" [nzOkLoading]="isOkLoading">
+    <div *nzModalContent>
+        <nz-date-picker *ngIf="!apresDate" nzInline nzShowTime [(ngModel)]="dateRdv" (ngModelChange)="onChange()"></nz-date-picker>
+        <spinner-root [loading]="loadingEmpLibre" />
+        <div *ngIf="apresDate">
+            <h4 *ngIf="employes.length>0">Voici la liste des employés libres à cette date</h4>
+            <h4 *ngIf="employes.length==0">On est plein à cette date</h4>
+            <nz-radio-group [(ngModel)]="radioValue">
+                <label *ngFor="let item of employes" nz-radio nzValue="{{item._id}}">{{item.nom}} {{item.prenom}}</label>
+            </nz-radio-group>
+        </div>
     </div>
 </nz-modal>
 
