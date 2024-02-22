@@ -7,10 +7,27 @@
             <nz-page-header-extra>
                 <nav class="menu">
                     <ul>
-                        <li><a (click)="navigate('/client')">Accueil</a></li>
-                        <li><a (click)="navigate('/client/profil')">Mon profil</a></li>
-                        <li *ngIf="!estConnecte"><a (click)="navigate('login/client')">Se connecter</a></li>
-                        <li *ngIf="estConnecte"><a (click)="seDeconnecter()">Se déconnecter</a></li>
+                        <li><a (click)="navigate('/client')" class="lien">
+                            <span class="icone" nz-icon nzType="home" nzTheme="outline"></span>
+                            <span>Accueil</span>
+                        </a></li>
+                        <li><a (click)="navigate('')" class="lien">
+                            <span class="icone" nz-icon nzType="shopping" nzTheme="outline"></span>                            
+                            <span>Payement</span>
+                            <span *ngIf="estConnecte" class="badge">3</span>
+                        </a></li>
+                        <li><a (click)="navigate('/client/profil')" class="lien">
+                            <span class="icone" nz-icon nzType="user" nzTheme="outline"></span>
+                            <span>Mon profil</span>
+                        </a></li>
+                        <li *ngIf="!estConnecte"><a (click)="navigate('login/client')" class="lien">
+                            <span class="icone" nz-icon nzType="login" nzTheme="outline"></span>
+                            <span>Se connecter</span>
+                        </a></li>
+                        <li *ngIf="estConnecte"><a (click)="seDeconnecter()" class="lien">
+                            <span class="icone" nz-icon nzType="logout" nzTheme="outline"></span>
+                            <span>Se déconnecter</span>
+                        </a></li>
                     </ul>
                 </nav>
             </nz-page-header-extra>

@@ -1,8 +1,30 @@
 /* menu.component.css */
+.icone {
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.lien {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: -0px;
+    right: 9px;
+    background-color: #B22222;
+    color: white;
+    font-size: 14px;
+    padding: 0px 6px;
+    border-radius: 75%;
+}
 
 .menu {
     background-color: #009688;
-    /* Couleur de fond du menu */
 }
 
 .menu ul {
@@ -14,15 +36,13 @@
 .menu ul li {
     display: inline-block;
     position: relative;
-    /* Pour positionner les sous-menus */
 }
 
 .menu ul li a {
     color: #fff;
-    /* Couleur du texte des liens */
     text-decoration: none;
     padding: 10px;
-    display: block;
+/*     display: block; */
 }
 
 .menu ul li:hover>ul.submenu {

@@ -47,7 +47,6 @@ export class LoginComponent implements OnInit{
         this.loading=true;
         this.callAPI.login(this.login).subscribe(
             (data: any) => {
-                console.log(data)
                 if(data.length==0){
                     this.erreur();
                 }
