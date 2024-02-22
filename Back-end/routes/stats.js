@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Employe = require('./models/Employe');
-const RendezVous = require('./models/RendezVous');
-const Depense = require('./models/Depense');
+const Employe = require('../models/Employe');
+const RendezVous = require('../models/RendezVous');
+const Depense = require('../models/Depense');
 
 // Temps moyen de travail pour chaque employé
 router.get('/temps-travail', async (req, res) => {
@@ -19,8 +19,34 @@ router.get('/temps-travail', async (req, res) => {
           temps_moyen_travail: {
             $avg: {
               $subtract: [
-                { $hour: "$horaires_travail.heure_fin" },
-                { $hour: "$horaires_travail.heure_debut" }
+                {
+                  $hour: {
+                    $dateFromString: {
+                      dateString: {
+                        $concat: [
+                          "2022-01-01T",
+                          "$horaires_travail.heure_fin",
+                          ":00"
+                        ]
+                      },
+                      format: "%Y-%m-%dT%H:%M:%S"
+                    }
+                  }
+                },
+                {
+                  $hour: {
+                    $dateFromString: {
+                      dateString: {
+                        $concat: [
+                          "2022-01-01T",
+                          "$horaires_travail.heure_debut",
+                          ":00"
+                        ]
+                      },
+                      format: "%Y-%m-%dT%H:%M:%S"
+                    }
+                  }
+                }
               ]
             }
           }
