@@ -17,7 +17,7 @@ router.get('/historique/:idclient', async (req, res) => {
     res.json(rdv);
 });
 
-router.post('/employeLibre' , async (req, res) => {
+router.post('/employeLibre', Utilitaire.verifyToken, async (req, res) => {
     const emp = await Utilitaire.employeLibre(req.body.date);
     res.json(emp);
 });

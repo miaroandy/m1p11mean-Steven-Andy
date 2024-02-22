@@ -66,6 +66,11 @@ export class HomeServiceComponent implements OnInit {
 
     handleOk(value:number): void {
         if(value==1){
+            if (this.radioValue == "") {
+                this.handleCancel();
+                this.message.create('error', "Erreur, vous devez choisir un employé");
+                return;
+            }
             this.isOkLoading = true;
             const favoris={
                 id: localStorage.getItem("identifiant"),
@@ -75,12 +80,14 @@ export class HomeServiceComponent implements OnInit {
             this.callAPI.ajoutFavoris(favoris).subscribe(() => {
                 this.isVisible = false;
                 this.isOkLoading = false;
+                this.message.create('success',"Favoris ajoutés avec succès");
             });
         }
         if(value==2){
             if(this.radioValue==""){
                 this.handleCancel();
                 this.message.create('error', "Votre rendez-vous n'est pas pris en compte");
+                return;
             }
             this.isOkLoading = true;
             const rdv={
@@ -93,6 +100,7 @@ export class HomeServiceComponent implements OnInit {
             this.callAPI.ajoutRDV(rdv).subscribe(() => {
                 this.isVisibleRdv = false;
                 this.isOkLoading = false;
+                this.message.create('success', "le rendez-vous a été pris en compte");
             });
         }
     }
