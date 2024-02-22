@@ -1,31 +1,59 @@
-<div>
-  <h2>Temps moyen de travail pour chaque employé</h2>
-  <div *ngFor="let stat of tempsTravailMoyen">
-    <p>{{ stat.nom }} {{ stat.prenom }} - Temps moyen de travail : {{ stat.temps_moyen_travail }} heures</p>
-  </div>
-</div>
+<nz-row style="margin-bottom: 16px;">
+  <nz-col nzSpan="12">
+    <nz-card style="margin-right: 8px; margin-left: 8px;">
+      <h2>Temps moyen de travail pour chaque employé</h2>
+      <div style="width: 50%; margin: auto;">
+        <canvas id="tempsMoyenTravailChart"></canvas>
+      </div>
+    </nz-card>
+  </nz-col>
 
-<div style="width: 600px;">
-  <h2>Réservations par jour</h2>
-  <canvas id="reservationsParJourChart"></canvas>
-</div>
+  <nz-col nzSpan="12">
+    <nz-card style="margin-right: 8px; margin-left: 8px;">
+      <h2>Réservations par jour</h2>
+      <div>
+        <canvas id="reservationsParJourChart"></canvas>
+      </div>
+    </nz-card>
+  </nz-col>
+</nz-row>
 
-<div style="width: 600px;">
-  <h2>Réservations par mois</h2>
-  <canvas id="reservationsParMoisChart"></canvas>
-</div>
+<nz-row style="margin-bottom: 16px;">
+  <nz-col nzSpan="12">
+    <nz-card style="margin-right: 8px; margin-left: 8px;">
+      <h2>Réservations par mois</h2>
+      <div>
+        <canvas id="reservationsParMoisChart"></canvas>
+      </div>
+    </nz-card>
+  </nz-col>
 
-<div style="width: 600px;">
-  <h2>Chiffre d'affaires par jour</h2>
-  <canvas id="chiffreAffairesParJourChart"></canvas>
-</div>
+  <nz-col nzSpan="12">
+    <nz-card style="margin-right: 8px; margin-left: 8px;">
+      <h2>Chiffre d'affaires par jour</h2>
+      <div>
+        <canvas id="chiffreAffairesParJourChart"></canvas>
+      </div>
+    </nz-card>
+  </nz-col>
+</nz-row>
 
-<div style="width: 600px;">
-  <h2>Chiffre d'affaires par mois</h2>
-  <canvas id="chiffreAffairesParMoisChart"></canvas>
-</div>
+<nz-row style="margin-bottom: 16px;">
+  <nz-col nzSpan="12">
+    <nz-card style="margin-right: 8px; margin-left: 8px;">
+      <h2>Chiffre d'affaires par mois</h2>
+      <div>
+        <canvas id="chiffreAffairesParMoisChart"></canvas>
+      </div>
+    </nz-card>
+  </nz-col>
 
-<div style="width: 600px;">
-  <h2>Bénéfice par mois</h2>
-  <canvas id="beneficeParMoisChart"></canvas>
-</div>
+  <nz-col nzSpan="12">
+    <nz-card style="margin-right: 8px; margin-left: 8px;">
+      <h2>Bénéfice par mois</h2>
+      <div>
+        <canvas id="beneficeParMoisChart"></canvas>
+      </div>
+    </nz-card>
+  </nz-col>
+</nz-row>

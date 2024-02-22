@@ -7,11 +7,13 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { Chart } from 'chart.js/auto';
 import { NgChartsModule } from 'ng2-charts';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 @Component({
   selector: 'app-stats',
   standalone: true,
-  imports: [NzTableModule, NzTypographyModule, NgFor, NgIf, NzSpinModule, NzButtonModule, NgChartsModule],
+  imports: [NzTableModule, NzTypographyModule, NgFor, NgIf, NzSpinModule, NzButtonModule, NgChartsModule, NzCardModule, NzGridModule],
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.css'
 })
@@ -38,6 +40,7 @@ export class StatsComponent {
     this.callAPI.getTempsTravailMoyen()
       .subscribe((data: any[]) => {
         this.tempsTravailMoyen = data;
+        this.createTempsMoyenTravailChart();
       }, (error) => {
         console.error('Erreur lors de la récupération du temps moyen de travail pour chaque employé :', error);
       });
@@ -91,6 +94,24 @@ export class StatsComponent {
       }, (error) => {
         console.error('Erreur lors de la récupération des bénéfices par mois :', error);
       });
+  }
+
+  createTempsMoyenTravailChart(): void {
+    const noms = this.tempsTravailMoyen.map(stat => stat.nom);
+    const temps_moyen_travail = this.tempsTravailMoyen.map(stat => stat.temps_moyen_travail);
+
+    new Chart("tempsMoyenTravailChart", {
+      type: 'doughnut',
+      data: {
+        labels: noms,
+        datasets: [{
+          label: 'Temps moyen de travail',
+          data: temps_moyen_travail,
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          hoverOffset: 4
+        }]
+      }
+    });
   }
 
   createReservationsParJourChart(): void {
@@ -150,7 +171,7 @@ export class StatsComponent {
     const chiffreAffaires = this.chiffreAffairesParJour.map(stat => stat.chiffre_affaires);
 
     new Chart("chiffreAffairesParJourChart", {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: jours,
         datasets: [{
@@ -173,10 +194,10 @@ export class StatsComponent {
 
   createChiffreAffairesParMoisChart(): void {
     const mois = this.chiffreAffairesParMois.map(stat => stat._id.month);
-    const chiffreAffaires = this.chiffreAffairesParMois.map(stat => stat.chiffre_affaires);
+    const chiffreAffaires = this.chiffreAffairesParMois.map(stat => stat.chiffreAffaires);
 
     new Chart("chiffreAffairesParMoisChart", {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: mois,
         datasets: [{
@@ -202,7 +223,7 @@ export class StatsComponent {
     const benefice = this.beneficeParMois.map(stat => stat.benefice);
 
     new Chart("beneficeParMoisChart", {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: mois,
         datasets: [{
