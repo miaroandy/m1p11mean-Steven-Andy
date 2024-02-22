@@ -1,5 +1,6 @@
 var express = require('express');
 const RendezVous = require('../models/RendezVous');
+const Utilitaire = require('../utils/utilitaire');
 var router = express.Router();
 
 
@@ -14,6 +15,11 @@ router.get('/historique/:idclient', async (req, res) => {
         { path: 'employe' }
     ]);
     res.json(rdv);
+});
+
+router.post('/employeLibre' , async (req, res) => {
+    const emp = await Utilitaire.employeLibre(req.body.date);
+    res.json(emp);
 });
 
 module.exports = router;
