@@ -28,8 +28,12 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    component: TemplateAdminComponent, 
+    component: TemplateAdminComponent,
     children: [
+      {
+        path: '',
+        loadChildren: () => import('./stats/stats.routes').then(m => m.STATS_ROUTES)
+      },
       {
         path: 'service',
         loadChildren: () => import('./service/service.routes').then(m => m.SERVICE_ROUTES)
@@ -40,10 +44,6 @@ export const routes: Routes = [
       },
       {
         path: 'employe',
-        loadChildren: () => import('./employe/employe.routes').then(m => m.EMPLOYE_ROUTES)
-      },
-      {
-        path: '',
         loadChildren: () => import('./employe/employe.routes').then(m => m.EMPLOYE_ROUTES)
       },
     ],
