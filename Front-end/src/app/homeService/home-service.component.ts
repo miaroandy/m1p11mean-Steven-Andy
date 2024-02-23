@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CallAPI } from '../utilitaires/CallAPI';
 import { SpinnerComponent } from '../component/spinner/spinner.component';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Service } from '../model/Service';
 import { ActivatedRoute } from '@angular/router';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
@@ -17,7 +17,7 @@ import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
     selector: 'home-service',
     templateUrl: './home-service.component.html',
     standalone: true,
-    imports: [NgFor, NgIf, NzMessageModule, SpinnerComponent, NzTypographyModule, NzModalModule, NzRadioModule, FormsModule, NzButtonModule, NzDatePickerModule],
+    imports: [NgFor, NgIf, NzMessageModule, SpinnerComponent,CommonModule ,NzTypographyModule, NzModalModule, NzRadioModule, FormsModule, NzButtonModule, NzDatePickerModule],
     styleUrls: ['./home-service.component.css']
 })
 export class HomeServiceComponent implements OnInit {
