@@ -13,7 +13,7 @@
           <tr *ngFor="let data of borderedTable.data">
               <td>{{ data.nom }}</td>
               <td>{{ data.prix }}</td>
-              <td>{{ data.taux_commission }}</td>
+              <td>{{ data.taux_commission * 100}}</td>
               <td>{{ data.duree }}</td>
               <td><button type="button" (click)="onClick(data._id)" nz-button nzType="primary">Détails</button></td>
           </tr>

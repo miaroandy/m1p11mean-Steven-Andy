@@ -110,12 +110,28 @@ export class StatsComponent {
           backgroundColor: 'rgba(75, 192, 192, 0.2)',
           hoverOffset: 4
         }]
+      },
+      options: {
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.toFixed(2);
+                return value + " h";
+              }
+            }
+          }
+        }
       }
     });
   }
 
   createReservationsParJourChart(): void {
-    const jours = this.reservationsParJour.map(stat => stat._id);
+    const jours = this.reservationsParJour.map(stat => {
+      const { day, month, year } = stat._id;
+      const formattedDate = `${day}/${month.toString().padStart(2, '0')}/${year}`;
+      return formattedDate;
+    });
     const nombreReservations = this.reservationsParJour.map(stat => stat.nombre_reservations);
 
     new Chart("reservationsParJourChart", {
@@ -133,7 +149,10 @@ export class StatsComponent {
       options: {
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            ticks: {
+              stepSize: 1
+            }
           }
         }
       }
@@ -141,7 +160,11 @@ export class StatsComponent {
   }
 
   createReservationsParMoisChart(): void {
-    const mois = this.reservationsParMois.map(stat => stat._id);
+    const mois = this.reservationsParMois.map(stat => {
+      const { month, year } = stat._id;
+      const formattedDate = `${month.toString().padStart(2, '0')}/${year}`;
+      return formattedDate;
+    });
     const nombreReservations = this.reservationsParMois.map(stat => stat.nombre_reservations);
 
     new Chart("reservationsParMoisChart", {
@@ -159,7 +182,10 @@ export class StatsComponent {
       options: {
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            ticks: {
+              stepSize: 1
+            }
           }
         }
       }
@@ -167,7 +193,11 @@ export class StatsComponent {
   }
 
   createChiffreAffairesParJourChart(): void {
-    const jours = this.chiffreAffairesParJour.map(stat => stat._id);
+    const jours = this.chiffreAffairesParJour.map(stat => {
+      const { day, month, year } = stat._id;
+      const formattedDate = `${day}/${month.toString().padStart(2, '0')}/${year}`;
+      return formattedDate;
+    });
     const chiffreAffaires = this.chiffreAffairesParJour.map(stat => stat.chiffre_affaires);
 
     new Chart("chiffreAffairesParJourChart", {
@@ -185,7 +215,23 @@ export class StatsComponent {
       options: {
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            ticks: {
+              callback: function (value, index, values) {
+                return value?.toLocaleString() + " Ar";
+              }
+            }
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const dataset = context.dataset;
+                const value = dataset.data[context.dataIndex];
+                return value?.toLocaleString() + " Ar";
+              }
+            }
           }
         }
       }
@@ -193,8 +239,12 @@ export class StatsComponent {
   }
 
   createChiffreAffairesParMoisChart(): void {
-    const mois = this.chiffreAffairesParMois.map(stat => stat._id.month);
-    const chiffreAffaires = this.chiffreAffairesParMois.map(stat => stat.chiffreAffaires);
+    const mois = this.chiffreAffairesParMois.map(stat => {
+      const { month, year } = stat._id;
+      const formattedDate = `${month.toString().padStart(2, '0')}/${year}`;
+      return formattedDate;
+    });
+    const chiffreAffaires = this.chiffreAffairesParMois.map(stat => stat.chiffre_affaires);
 
     new Chart("chiffreAffairesParMoisChart", {
       type: 'line',
@@ -211,7 +261,23 @@ export class StatsComponent {
       options: {
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            ticks: {
+              callback: function (value, index, values) {
+                return value?.toLocaleString() + " Ar";
+              }
+            }
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const dataset = context.dataset;
+                const value = dataset.data[context.dataIndex];
+                return value?.toLocaleString() + " Ar";
+              }
+            }
           }
         }
       }
@@ -219,7 +285,10 @@ export class StatsComponent {
   }
 
   createBeneficeParMoisChart(): void {
-    const mois = this.beneficeParMois.map(stat => stat.mois);
+    const mois = this.beneficeParMois.map(stat => {
+      const formattedDate = `${stat.mois.toString().padStart(2, '0')}/${stat.annee}`;
+      return formattedDate;
+    });
     const benefice = this.beneficeParMois.map(stat => stat.benefice);
 
     new Chart("beneficeParMoisChart", {
@@ -237,7 +306,23 @@ export class StatsComponent {
       options: {
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            ticks: {
+              callback: function (value, index, values) {
+                return value?.toLocaleString() + " Ar";
+              }
+            }
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const dataset = context.dataset;
+                const value = dataset.data[context.dataIndex];
+                return value?.toLocaleString() + " Ar";
+              }
+            }
           }
         }
       }
