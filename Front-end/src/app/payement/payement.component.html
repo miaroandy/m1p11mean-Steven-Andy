@@ -1,0 +1,51 @@
+<h2 class="title" nz-typography>Payement</h2>
+<div *ngIf="!loading">
+    <div  *ngFor="let item of rdv" class="service-card">
+        <div class="service-details">
+            <h2>{{item.service.nom}}</h2>
+
+            <p class="info">Durée: {{ item.service.duree}} minutes </p>
+            <p class="info">Date: {{ item.date | date:'dd/MM/yyyy HH:MM:SS'}} </p>
+            <p class="info" *ngIf="item.service.offres_speciales[0]">Prix: {{ item.service.prix-(item.service.prix *item.service.offres_speciales[0].reduction )}} Ar</p>
+            <p class="info" *ngIf="!item.service.offres_speciales[0]">Prix: {{item.service.prix}} Ar</p>
+
+            <div class="service-actions">
+                <button class="btn" (click)="showModal(item._id)">Payer maintenant</button>
+            </div>
+        </div>
+        <div class="service-image">
+            <img src="{{item.service.photo}}" alt="{{item.service.nom}}">
+        </div>
+    </div>
+
+    <nz-modal [(nzVisible)]="isVisible" nzTitle=""
+        (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
+        <div *nzModalContent>
+            <div class="payment-container">
+                <h1>Paiement</h1>
+            
+                <div class="card-details">
+                    <label for="mode">Mode de paiement:</label>
+                    <nz-select class="select" id="mode" [(ngModel)]="mode">
+                        <nz-option nzValue="Visa" nzLabel="Visa"></nz-option>
+                        <nz-option nzValue="MasterCard" nzLabel="MasterCard"></nz-option>
+                        <nz-option nzValue="American Express" nzLabel="American Express"></nz-option>
+                    </nz-select>
+
+                    <label for="card-number">Numéro de Carte:</label>
+                    <input class="saisie" type="text" [(ngModel)]="num"/>
+            
+                    <label for="expiry">Date d'Expiration:</label>
+                    <nz-date-picker id="expiry" class="saisie" nzMode="month" [(ngModel)]="expire"></nz-date-picker>
+
+            
+                    <label for="cvv">Code de sécurite:</label>
+                    <input class="saisie" type="text" id="cvv" [(ngModel)]="cvv">
+                </div>
+            
+            </div>
+
+        </div>
+    </nz-modal>
+</div>
+<spinner-root [loading]="loading" />

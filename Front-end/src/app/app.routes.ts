@@ -7,6 +7,7 @@ import { TemplateClientComponent } from './template/client/templateClient.compon
 import { ProfilComponent } from './profil/profil.component';
 import { TemplateAdminComponent } from './template/admin/templateAdmin.component';
 import { HomeServiceComponent } from './homeService/home-service.component';
+import { PayementComponent } from './payement/payement.component';
 
 export const routes: Routes = [
   { path: 'login/:role', component: LoginComponent },
@@ -17,6 +18,9 @@ export const routes: Routes = [
     children: [
       {
         path: 'profil', component : ProfilComponent
+      },
+      {
+        path: 'payement', component: PayementComponent
       },
       {
         path: 'service/:id', component: HomeServiceComponent

@@ -41,6 +41,30 @@ export class CallAPI {
         );
     }
 
+    servicePayement(): Observable <RendezVous[]>{
+        const url = this.apiUrl + "payement/" + localStorage.getItem("identifiant");
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<RendezVous[]>(url, { headers }).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, []))
+        );
+    }
+
+    payerRDV(id:string):Observable<RendezVous>{
+        const url = this.apiUrl + "payement/payer/" + id;
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<RendezVous>(url, { headers }).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, []))
+        );
+    }
+
     employeLibre(date: string): Observable<Employe[]> {
         const url = this.apiUrl + "rdv/employeLibre";
         const token = localStorage.getItem('token');
