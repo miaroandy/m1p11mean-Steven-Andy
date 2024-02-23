@@ -66,7 +66,11 @@ router.get('/reservations-jour', async (req, res) => {
     const result = await RendezVous.aggregate([
       {
         $group: {
-          _id: { $dayOfMonth: "$date" },
+          _id: { 
+            day : { $dayOfMonth: "$date" },
+            month: { $month: "$date" },
+            year: { $year: "$date" }
+          },
           nombre_reservations: { $sum: 1 }
         }
       }
@@ -84,7 +88,10 @@ router.get('/reservations-mois', async (req, res) => {
     const result = await RendezVous.aggregate([
       {
         $group: {
-          _id: { $month: "$date" },
+          _id: { 
+            month: { $month: "$date" },
+            year: { $year: "$date" }
+          },
           nombre_reservations: { $sum: 1 }
         }
       }
@@ -108,11 +115,54 @@ router.get('/chiffre-affaires-jour', async (req, res) => {
           as: "service_info"
         }
       },
+      { $unwind: "$service_info" },
       {
         $group: {
-          _id: { $dayOfMonth: "$date" },
-          chiffre_affaires: { $sum: "$service_info.prix" }
+          _id: { 
+            day : { $dayOfMonth: "$date" },
+            month: { $month: "$date" },
+            year: { $year: "$date" }
+          },
+          chiffre_affaires: { 
+            $sum: { 
+              $cond: [
+                { $gt: [{ $size: "$service_info.offres_speciales" }, 0] },
+                {
+                  $let: {
+                    vars: {
+                      matchingOffer: {
+                        $arrayElemAt: [
+                          {
+                            $filter: {
+                              input: "$service_info.offres_speciales",
+                              cond: {
+                                $and: [
+                                  { $gte: ["$date", "$$this.datedebut"] },
+                                  { $lte: ["$date", "$$this.datefin"] }
+                                ]
+                              }
+                            }
+                          },
+                          0
+                        ]
+                      }
+                    },
+                    in: {
+                      $multiply: [
+                        "$service_info.prix",
+                        { $subtract: [1, { $divide: ["$$matchingOffer.reduction", 100] }] }
+                      ]
+                    }
+                  }
+                },
+                "$service_info.prix"
+              ]
+            }
+          }
         }
+      },
+      {
+        $sort: { "_id.year": 1, "_id.month": 1, "_id.day": 1 }
       }
     ]);
     res.json(result);
@@ -150,11 +200,11 @@ router.get('/benefice-mois', async (req, res) => {
     const beneficeParMois = chiffreAffairesParMois.map(chiffre => {
       const key = `${chiffre._id.year}-${chiffre._id.month}`;
       const depenses = depensesMap[key] || 0;
-      const benefice = chiffre.chiffreAffaires - depenses;
+      const benefice = chiffre.chiffre_affaires - depenses;
       return {
         annee: chiffre._id.year,
         mois: chiffre._id.month,
-        chiffreAffaires: chiffre.chiffreAffaires,
+        chiffre_affaires: chiffre.chiffre_affaires,
         depenses,
         benefice
       };
@@ -182,7 +232,42 @@ async function getChiffreAffairesParMois() {
     {
       $group: {
         _id: { month: { $month: "$date" }, year: { $year: "$date" } },
-        chiffreAffaires: { $sum: "$service_info.prix" }
+        chiffre_affaires: { 
+          $sum: { 
+            $cond: [
+              { $gt: [{ $size: "$service_info.offres_speciales" }, 0] },
+              {
+                $let: {
+                  vars: {
+                    matchingOffer: {
+                      $arrayElemAt: [
+                        {
+                          $filter: {
+                            input: "$service_info.offres_speciales",
+                            cond: {
+                              $and: [
+                                { $gte: ["$date", "$$this.datedebut"] },
+                                { $lte: ["$date", "$$this.datefin"] }
+                              ]
+                            }
+                          }
+                        },
+                        0
+                      ]
+                    }
+                  },
+                  in: {
+                    $multiply: [
+                      "$service_info.prix",
+                      { $subtract: [1, { $divide: ["$$matchingOffer.reduction", 100] }] }
+                    ]
+                  }
+                }
+              },
+              "$service_info.prix"
+            ]
+          }
+        }
       }
     },
     {
