@@ -9,26 +9,38 @@
 
                 <nav class="menu">
                     <ul>
-                        <li><a (click)="navigate('/admin')">Accueil</a></li>
+                        <li><a (click)="navigate('/admin')" class="lien">
+                            <span class="icone" nz-icon nzType="line-chart" nzTheme="outline"></span>
+                            <span>Statistique</span>
+                        </a></li>
                         <li>
-                            <a href="#">Services</a>
+                            <a href="#" class="lien">
+                                <span class="icone" nz-icon nzType="book" nzTheme="outline"></span>
+                                <span>Services</span>
+                            </a>
                             <ul class="submenu">
-                                <li><a (click)="navigate('/admin/service')">Liste services</a></li>
-                                <li><a (click)="navigate('/admin/service/add')">Ajout service</a></li>
+                                <li class="subliste"><a (click)="navigate('/admin/service')">Liste services</a></li>
+                                <li class="subliste"><a (click)="navigate('/admin/service/add')">Ajout service</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">Employés</a>
+                            <a href="#" class="lien">
+                                <span class="icone" nz-icon nzType="user" nzTheme="outline"></span>
+                                <span>Employés</span>
+                            </a>
                             <ul class="submenu">
-                                <li><a (click)="navigate('/admin/employe')">Liste employés</a></li>
-                                <li><a (click)="navigate('/admin/employe/add')">Ajout employé </a></li>
+                                <li class="subliste"><a (click)="navigate('/admin/employe')">Liste employés</a></li>
+                                <li class="subliste"><a (click)="navigate('/admin/employe/add')">Ajout employé </a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">Dépenses</a>
+                            <a href="#" class="lien">
+                                <span class="icone" nz-icon nzType="dollar" nzTheme="outline"></span>
+                                <span>Dépenses</span>
+                            </a>
                             <ul class="submenu">
-                                <li><a (click)="navigate('/admin/depense')">Liste dépenses</a></li>
-                                <li><a (click)="navigate('/admin/depense/add')">Ajout dépense </a></li>
+                                <li class="subliste"><a (click)="navigate('/admin/depense')">Liste dépenses</a></li>
+                                <li class="subliste"><a (click)="navigate('/admin/depense/add')">Ajout dépense </a></li>
                             </ul>
                         </li>
                     </ul>
