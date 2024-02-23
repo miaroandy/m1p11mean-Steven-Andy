@@ -16,7 +16,7 @@ import { RendezVous } from '../model/RendezVous';
 })
 export class CallAPI {
     apiUrl = 'https://salon-beaute-service.onrender.com/';
-    //apiUrl = 'http://localhost:3000/';
+    // apiUrl = 'http://localhost:3000/';
 
     constructor(private http: HttpClient,
         private router: Router){ }
@@ -210,5 +210,35 @@ export class CallAPI {
     saveDepense(depense: Depense): any{
         const url = this.apiUrl + "depenses";
         return this.http.post(url, depense.toJSON());
+    }
+
+    getTempsTravailMoyen(): Observable<any[]> {
+      const url = this.apiUrl + 'stats/temps-travail';
+      return this.http.get<any[]>(url);
+    }
+
+    getReservationsParMois(): Observable<any[]> {
+      const url = this.apiUrl + 'stats/reservations-mois';
+      return this.http.get<any[]>(url);
+    }
+
+    getReservationsParJour(): Observable<any[]> {
+      const url = this.apiUrl + 'stats/reservations-jour';
+      return this.http.get<any[]>(url);
+    }
+
+    getChiffreAffairesParMois(): Observable<any[]> {
+      const url = this.apiUrl + 'stats/chiffre-affaires-mois';
+      return this.http.get<any[]>(url);
+    }
+
+    getChiffreAffairesParJour(): Observable<any[]> {
+      const url = this.apiUrl + 'stats/chiffre-affaires-jour';
+      return this.http.get<any[]>(url);
+    }
+
+    getBeneficeParMois(): Observable<any[]> {
+      const url = this.apiUrl + 'stats/benefice-mois';
+      return this.http.get<any[]>(url);
     }
 }
