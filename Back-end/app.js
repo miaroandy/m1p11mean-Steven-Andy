@@ -14,7 +14,8 @@ var depensesRouter = require('./routes/depenses');
 var clientRouter = require('./routes/client');
 var rdvRouter = require('./routes/rdv');
 var statsRouter = require('./routes/stats');
-var payementRouter= require('./routes/Payement')
+var payementRouter= require('./routes/Payement');
+var managerRouter=require('./routes/manager');
 var db = require('./utils/db');
 
 var app = express();
@@ -35,6 +36,7 @@ app.use('/login', loginRouter);
 app.use('/client', clientRouter);
 app.use('/rdv', rdvRouter);
 app.use('/stats', statsRouter);
-app.use('/payement',payementRouter);
+app.use('/payement', payementRouter);
+app.use('/admin', managerRouter);
 
 module.exports = app;
