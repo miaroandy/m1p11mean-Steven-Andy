@@ -4,18 +4,23 @@
 
     <div nz-col nzSpan="8" *ngIf="!loading">
         <form #depenseForm="ngForm">
+            <h4>Salaire :</h4>
             <input nz-input placeholder="Salaire" [(ngModel)]="depense.salaire" name="salaire" type="number" nzSize="large" />
             <br />
             <br />
+            <h4>Loyer :</h4>
             <input nz-input placeholder="Loyer" [(ngModel)]="depense.loyer" name="loyer" type="number" nzSize="large" />
             <br />
             <br />
+            <h4>Achat piece :</h4>
             <input nz-input placeholder="Achat piece" [(ngModel)]="depense.achat_piece" name="achat_piece" type="number" nzSize="large" />
             <br />
             <br />
+            <h4>Autres depenses :</h4>
             <input nz-input placeholder="Autres depenses" [(ngModel)]="depense.autres_depenses" name="autres_depenses" type="number" nzSize="large" />
             <br />
             <br />
+            <h4>Date :</h4>
             <input nz-input placeholder="Date" [(ngModel)]="depense.date" name="date" type="date" nzSize="large" />
             <br />
             <br />

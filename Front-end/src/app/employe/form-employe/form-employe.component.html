@@ -4,12 +4,15 @@
 
     <div nz-col nzSpan="8" *ngIf="!loading">
         <form #employeForm="ngForm">
+            <h4>Nom : </h4>
             <input nz-input placeholder="Nom" [(ngModel)]="employe.nom" name="nom" type="text" nzSize="large" />
             <br />
             <br />
+            <h4>Prenom : </h4>
             <input nz-input placeholder="Prenom" [(ngModel)]="employe.prenom" name="prenom" type="text" nzSize="large" />
             <br />
             <br />
+            <h4>Email : </h4>
             <input nz-input placeholder="Email" [(ngModel)]="employe.email" name="email" type="email" nzSize="large" />
             <br />
             <br />

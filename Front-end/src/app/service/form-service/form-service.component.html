@@ -4,18 +4,23 @@
 
     <div nz-col nzSpan="8" *ngIf="!loading">
         <form #serviceForm="ngForm">
+            <h4>Nom :</h4>
             <input nz-input placeholder="Nom" [(ngModel)]="service.nom" name="nom" type="text" nzSize="large" />
             <br />
             <br />
+            <h4>Prix :</h4>
             <input nz-input placeholder="Prix" [(ngModel)]="service.prix" name="prix" type="text" nzSize="large" />
             <br />
             <br />
+            <h4>Durée :</h4>
             <input nz-input placeholder="Durée" [(ngModel)]="service.duree" name="duree" type="number" nzSize="large" />
             <br />
             <br />
+            <h4>Taux commission :</h4>
             <input nz-input placeholder="Taux commission" [(ngModel)]="service.taux_commission" name="taux_commission" type="number" nzSize="large" />
             <br />
             <br />
+            <h4>Image :</h4>
             <!-- <input nz-input placeholder="Photo" [(ngModel)]="service.photo" name="photo" type="file" nzSize="large" (change)="onFileSelected($event)"/> -->
             <div class="custom-dropzone" ngx-dropzone [multiple]="false" [accept]="'image/*'" (change)="onSelect($event)">
               <ngx-dropzone-label>

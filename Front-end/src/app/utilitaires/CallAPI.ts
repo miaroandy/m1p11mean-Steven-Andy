@@ -15,8 +15,8 @@ import { RendezVous } from '../model/RendezVous';
     providedIn: 'root',
 })
 export class CallAPI {
-    apiUrl = 'https://salon-beaute-service.onrender.com/';
-    // apiUrl = 'http://localhost:3000/';
+    //apiUrl = 'https://salon-beaute-service.onrender.com/';
+    apiUrl = 'http://localhost:3000/';
 
     constructor(private http: HttpClient,
         private router: Router){ }

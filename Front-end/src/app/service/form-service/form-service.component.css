@@ -8,3 +8,8 @@
 .custom-dropzone.ngx-dz-hovered {
   border: 2px solid lightgray;
 }
+
+h4 {
+	margin-left: 5px;
+	margin-bottom: 5px;
+}
