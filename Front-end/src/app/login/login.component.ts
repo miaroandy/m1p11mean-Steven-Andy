@@ -29,6 +29,18 @@ export class LoginComponent implements OnInit{
 
     ngOnInit(): void {
         this.login.role = this.route.snapshot.params['role'];
+        if(this.login.role=='client'){
+            this.login.email='ravaosoa@gmail.com';
+            this.login.mdp='test';
+        }
+        if (this.login.role == 'admin') {
+            this.login.email = 'admin@gmail.com';
+            this.login.mdp = 'admin';
+        }
+        if (this.login.role == 'employe') {
+            this.login.email = 'jeanpaul@gmail.com';
+            this.login.mdp = 'jeanpaul';
+        }
     }
 
     erreur(){

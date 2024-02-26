@@ -12,7 +12,13 @@ import { PayementComponent } from './payement/payement.component';
 export const routes: Routes = [
   { path: 'login/:role', component: LoginComponent },
   { path: 'inscription', component: InscriptionComponent },
-  {path: 'employe',component: TemplateEmployeComponent},
+  {path: 'employe',component: TemplateEmployeComponent,
+    children: [
+      {
+        path: '', component: HomeComponent
+      }
+    ],
+  },
   {
     path: 'client',component: TemplateClientComponent,
     children: [
