@@ -7,10 +7,14 @@
 
     <div nz-col nzSpan="8" >
 
-        <nz-card style="width:100%; text-align: center;"  [nzActions]="[ actionEdit,actionDelete]" >
+        <nz-card style="width:100%; text-align: center;" nzTitle="{{service.nom}}" [nzActions]="[ actionEdit,actionDelete]" >
           <img *ngIf="service.photo" [src]="service.photo" alt="Photo du service" style="max-width: 100%; max-height: 200px; margin-bottom: 10px;">
-            <nz-card-meta nzTitle="{{service.nom}}" nzDescription="{{service.prix}} Ar - {{service.duree}} min - {{service.taux_commission}} %"
-                ></nz-card-meta>
+            <!-- <nz-card-meta nzTitle="{{service.nom}}" nzDescription="{{service.prix}} Ar - {{service.duree}} min - {{service.taux_commission}} %"
+                ></nz-card-meta> -->
+            <p><strong>Prix:</strong> {{service.prix}} Ar</p>
+            <p><strong>Durée:</strong> {{service.duree}} min</p>
+            <p><strong>Taux de commission:</strong> {{service.taux_commission*100}} %</p>
+
         </nz-card>
         <ng-template #actionEdit>
             <span nz-icon nzType="edit"></span>

@@ -7,9 +7,11 @@
 
     <div nz-col nzSpan="8" >
 
-        <nz-card style="width:100%; text-align: center;"  [nzActions]="[ actionEdit,actionDelete]" >
-            <nz-card-meta nzTitle="{{depense.date}}" nzDescription="{{depense.salaire}} Ar - {{depense.loyer}} Ar - {{depense.achat_piece}} Ar - {{depense.autres_depenses}} Ar"
-                ></nz-card-meta>
+        <nz-card style="width:100%; text-align: center;" nzTitle="Depense du {{depense.date | date: 'dd/MM/yyyy'}}" [nzActions]="[ actionEdit,actionDelete]" >
+                <p *ngIf="depense.salaire"><strong>Salaire:</strong> {{depense.salaire}} Ar</p>
+                <p *ngIf="depense.loyer"><strong>Loyer:</strong> {{depense.loyer}} Ar</p>
+                <p *ngIf="depense.achat_piece"><strong>Achat piece:</strong>{{depense.achat_piece}} Ar</p>
+                <p *ngIf="depense.autres_depenses"><strong>Autres dépense:</strong> {{depense.autres_depenses}} Ar</p>
         </nz-card>
         <ng-template #actionEdit>
             <span nz-icon nzType="edit"></span>

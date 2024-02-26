@@ -14,7 +14,7 @@
                             <span>Statistique</span>
                         </a></li>
                         <li>
-                            <a href="#" class="lien">
+                            <a (click)="navigate('/admin/service')" class="lien">
                                 <span class="icone" nz-icon nzType="book" nzTheme="outline"></span>
                                 <span>Services</span>
                             </a>
@@ -24,7 +24,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#" class="lien">
+                            <a (click)="navigate('/admin/employe')" class="lien">
                                 <span class="icone" nz-icon nzType="user" nzTheme="outline"></span>
                                 <span>Employés</span>
                             </a>
@@ -34,7 +34,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#" class="lien">
+                            <a (click)="navigate('/admin/depense')" class="lien">
                                 <span class="icone" nz-icon nzType="dollar" nzTheme="outline"></span>
                                 <span>Dépenses</span>
                             </a>
@@ -43,6 +43,10 @@
                                 <li class="subliste"><a (click)="navigate('/admin/depense/add')">Ajout dépense </a></li>
                             </ul>
                         </li>
+                        <li><a (click)="seDeconnecter()" class="lien">
+                            <span class="icone" nz-icon nzType="logout" nzTheme="outline"></span>
+                            <span>Se déconnecter</span>
+                        </a></li>
                     </ul>
                 </nav>
 

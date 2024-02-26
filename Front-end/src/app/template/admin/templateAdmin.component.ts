@@ -23,4 +23,9 @@ export class TemplateAdminComponent {
         this.router.navigate([lien]);
     }
 
+    seDeconnecter() {
+        localStorage.clear();
+        this.router.navigate(['login/admin']);
+    }
+
 }
