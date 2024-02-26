@@ -15,7 +15,7 @@
               <td>{{ data.prix }}</td>
               <td>{{ data.taux_commission * 100}}</td>
               <td>{{ data.duree }}</td>
-              <td><a href="admin/service/{{data._id}}"><button type="button" (click)="onClick(data._id)" nz-button nzType="primary">Détails</button></a></td>
+              <td><button routerLink="{{data._id}}" nz-button nzType="primary">Détails</button></td>
           </tr>
       </tbody>
   </nz-table>

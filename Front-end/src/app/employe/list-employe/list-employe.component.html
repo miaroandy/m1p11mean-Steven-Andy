@@ -16,7 +16,7 @@
                             <td>{{ data.nom }}</td>
                             <td>{{ data.prenom }}</td>
                             <td>{{ data.email }}</td>
-                            <td><a href="admin/employe/{{data._id}}"><button type="button" (click)="onClick(data._id)" nz-button nzType="primary">Détails</button></a></td>
+                            <td><button routerLink="{{data._id}}"  nz-button nzType="primary">Détails</button></td>
                         </tr>
                     </tbody>
                 </nz-table>

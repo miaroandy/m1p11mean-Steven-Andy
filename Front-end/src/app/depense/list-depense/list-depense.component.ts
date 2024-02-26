@@ -6,12 +6,12 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { CallAPI } from '../../utilitaires/CallAPI';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-list-depense',
   standalone: true,
-  imports: [NzTableModule, NzTypographyModule, NgFor, NgIf, NzSpinModule, NzButtonModule,CommonModule],
+  imports: [NzTableModule, NzTypographyModule, NgFor, NgIf, NzSpinModule, NzButtonModule,CommonModule,RouterLink],
   templateUrl: './list-depense.component.html',
   styleUrl: './list-depense.component.css',
   providers: []
