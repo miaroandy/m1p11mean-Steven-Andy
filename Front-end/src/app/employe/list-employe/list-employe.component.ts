@@ -6,12 +6,12 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { CallAPI } from '../../utilitaires/CallAPI';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-list-employe',
   standalone: true,
-  imports: [NzTableModule, NzTypographyModule, NgFor, NgIf, NzSpinModule, NzButtonModule],
+  imports: [NzTableModule, NzTypographyModule, NgFor, NgIf, NzSpinModule, NzButtonModule, RouterLink],
   templateUrl: './list-employe.component.html',
   styleUrl: './list-employe.component.css',
   providers: []
@@ -33,7 +33,7 @@ export class ListEmployeComponent implements OnInit {
     });
   }
 
-  onClick(id: string){
+  navigate(id: string){
     this.router.navigate(['/employe', id])
   }
 }
