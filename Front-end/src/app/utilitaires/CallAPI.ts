@@ -25,7 +25,7 @@ export class CallAPI {
         const url = this.apiUrl + "rdv/historique/" + localStorage.getItem('identifiant');
         return this.http.get<RendezVous[]>(url).pipe(
             tap((response) => this.log(response)),
-            catchError((error) => this.handleError(error, []))
+            catchError((error) => this.handleError(error, [],1))
         );
     }
 
@@ -37,7 +37,7 @@ export class CallAPI {
         });
         return this.http.get<Service>(url,{headers}).pipe(
             tap((response) => this.log(response)),
-            catchError((error) => this.handleError(error, []))
+            catchError((error) => this.handleError(error, [],1))
         );
     }
 
@@ -49,7 +49,7 @@ export class CallAPI {
         });
         return this.http.get<RendezVous[]>(url, { headers }).pipe(
             tap((response) => this.log(response)),
-            catchError((error) => this.handleError(error, []))
+            catchError((error) => this.handleError(error, [],1))
         );
     }
 
@@ -61,7 +61,7 @@ export class CallAPI {
         });
         return this.http.get<RendezVous>(url, { headers }).pipe(
             tap((response) => this.log(response)),
-            catchError((error) => this.handleError(error, []))
+            catchError((error) => this.handleError(error, [],1))
         );
     }
 
@@ -76,7 +76,7 @@ export class CallAPI {
         }
         return this.http.post<Employe[]>(url, body ,{ headers }).pipe(
             tap((response) => this.log(response)),
-            catchError((error) => this.handleError(error, []))
+            catchError((error) => this.handleError(error, [],1))
         );
     }
 
@@ -88,7 +88,7 @@ export class CallAPI {
         });
         return this.http.post<RendezVous>(url, rdv, { headers }).pipe(
             tap((response) => this.log(response)),
-            catchError((error) => this.handleError(error, []))
+            catchError((error) => this.handleError(error, [],1))
         );
     }
 
@@ -106,7 +106,7 @@ export class CallAPI {
                 localStorage.setItem('identifiant',response.identifiant);
                 localStorage.setItem('role',response.role);
             }),
-            catchError((error) => this.handleError(error, []))
+            catchError((error) => this.handleError(error, [],1))
         );
     }
 
@@ -118,7 +118,7 @@ export class CallAPI {
         });
         return this.http.post(url,favoris,{headers}).pipe(
             tap((response) => this.log(response)),
-            catchError((error) => this.handleError(error, []))
+            catchError((error) => this.handleError(error, [],1))
         );
     }
 
@@ -130,7 +130,7 @@ export class CallAPI {
         });
         return this.http.post(url, favoris, { headers }).pipe(
             tap((response) => this.log(response)),
-            catchError((error) => this.handleError(error, []))
+            catchError((error) => this.handleError(error, [],1))
         );
     }
 
@@ -138,7 +138,7 @@ export class CallAPI {
         const url = this.apiUrl + "login/inscription";
         return this.http.post<Client>(url, client).pipe(
             tap((response) => this.log(response)),
-            catchError((error) => this.handleError(error, []))
+            catchError((error) => this.handleError(error, [],1))
         );
     }
 
@@ -146,7 +146,7 @@ export class CallAPI {
         const url=this.apiUrl+"employe";
         return this.http.get<Employe[]>(url).pipe(
             tap((response) => this.log(response)),
-            catchError((error) => this.handleError(error, []))
+            catchError((error) => this.handleError(error, [],2))
         );
     }
 
@@ -154,7 +154,7 @@ export class CallAPI {
         const url = this.apiUrl + "employe/"+id;
         return this.http.get<Employe>(url).pipe(
             tap((response) => this.log(response)),
-            catchError((error) => this.handleError(error, []))
+            catchError((error) => this.handleError(error, [],2))
         );
     }
 
@@ -162,7 +162,7 @@ export class CallAPI {
         const url=this.apiUrl+"employe";
         return this.http.post<string>(url, employe.toJSON()).pipe(
             tap((response) => this.log(response)),
-            catchError((error) => this.handleError(error, []))
+            catchError((error) => this.handleError(error, [],2))
         );
     }
 
@@ -174,7 +174,7 @@ export class CallAPI {
         });
         return this.http.get<Client>(url,{headers}).pipe(
             tap((response) => this.log(response)),
-            catchError((error) => this.handleError(error, []))
+            catchError((error) => this.handleError(error, [],1))
         );
     }
 
@@ -182,12 +182,20 @@ export class CallAPI {
         console.table(response);
     }
 
-    private handleError(error: HttpErrorResponse, errorValue: any) {
+    private handleError(error: HttpErrorResponse, errorValue: any, route:number) {
         if (error.error instanceof ErrorEvent) {
             console.error('Une erreur s\'est produite :', error.error.message);
         } else {
             if(error.status==401){
-                this.router.navigate(['/login/client']);
+                if(route==1){
+                    this.router.navigate(['/login/client']);
+                }
+                if(route==2){
+                    this.router.navigate(['/login/admin']);
+                }
+                if (route==3) {
+                    this.router.navigate(['/login/employe']);
+                }
             }
             console.error('Une erreur s\'est produite :', error.error.message);
         }
@@ -207,9 +215,13 @@ export class CallAPI {
 
     getServiceById(id: string): Observable<Service> {
         const url = this.apiUrl + "services/"+id;
-        return this.http.get<Service>(url).pipe(
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<Service>(url,{headers}).pipe(
             tap((response) => this.log(response)),
-            catchError((error) => this.handleError(error, []))
+            catchError((error) => this.handleError(error, [],2))
         );
     }
 
@@ -225,44 +237,97 @@ export class CallAPI {
 
     getDepenseById(id: string): Observable<Depense> {
         const url = this.apiUrl + "depenses/"+id;
-        return this.http.get<Depense>(url).pipe(
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<Depense>(url,{headers}).pipe(
             tap((response) => this.log(response)),
-            catchError((error) => this.handleError(error, []))
+            catchError((error) => this.handleError(error, [],2))
         );
     }
 
     saveDepense(depense: Depense): any{
         const url = this.apiUrl + "depenses";
-        return this.http.post(url, depense.toJSON());
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.post(url, depense.toJSON(),{headers}).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, [], 2))
+        );
     }
 
     getTempsTravailMoyen(): Observable<any[]> {
       const url = this.apiUrl + 'stats/temps-travail';
-      return this.http.get<any[]>(url);
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<any[]>(url,{headers}).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, [], 2))
+        );
     }
 
     getReservationsParMois(): Observable<any[]> {
       const url = this.apiUrl + 'stats/reservations-mois';
-      return this.http.get<any[]>(url);
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<any[]>(url,{headers}).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, [], 2))
+        );
     }
 
     getReservationsParJour(): Observable<any[]> {
       const url = this.apiUrl + 'stats/reservations-jour';
-      return this.http.get<any[]>(url);
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<any[]>(url,{headers}).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, [], 2))
+        );
     }
 
     getChiffreAffairesParMois(): Observable<any[]> {
       const url = this.apiUrl + 'stats/chiffre-affaires-mois';
-      return this.http.get<any[]>(url);
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<any[]>(url,{headers}).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, [], 2))
+        );
     }
 
     getChiffreAffairesParJour(): Observable<any[]> {
       const url = this.apiUrl + 'stats/chiffre-affaires-jour';
-      return this.http.get<any[]>(url);
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<any[]>(url,{headers}).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, [], 2))
+        );
     }
 
     getBeneficeParMois(): Observable<any[]> {
       const url = this.apiUrl + 'stats/benefice-mois';
-      return this.http.get<any[]>(url);
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<any[]>(url,{headers}).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, [], 2))
+        );
     }
 }

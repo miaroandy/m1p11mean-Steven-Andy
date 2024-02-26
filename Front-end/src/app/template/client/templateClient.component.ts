@@ -22,7 +22,7 @@ export class TemplateClientComponent implements OnInit{
     constructor(private router: Router){}
 
     ngOnInit(): void {
-        if(localStorage.getItem("token")){
+        if(localStorage.getItem("role")=='client'){
             this.estConnecte=true;
         }
     }

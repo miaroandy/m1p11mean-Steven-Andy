@@ -29,6 +29,11 @@ export class ProfilComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        if (localStorage.getItem("role") !== 'client') {
+            localStorage.clear();
+            this.router.navigate(['/login/client']);
+            return;
+        }
         this.callAPI.profilUser().subscribe(result => {
             this.client = result;
             this.loading = false;

@@ -9,6 +9,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { FormsModule } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -31,11 +32,17 @@ export class PayementComponent implements OnInit {
     
     constructor(
         private callAPI: CallAPI,
-        private message: NzMessageService
+        private message: NzMessageService,
+        private router: Router
     ) { }
 
 
     ngOnInit() {
+        if (localStorage.getItem("role") !== 'client') {
+            localStorage.clear();
+            this.router.navigate(['/login/client']);
+            return;
+        }
         this.callAPI.servicePayement().subscribe(result => {
             this.rdv = result;
             this.loading = false;

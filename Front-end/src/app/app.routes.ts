@@ -49,7 +49,7 @@ export const routes: Routes = [
       {
         path: 'employe',
         loadChildren: () => import('./employe/employe.routes').then(m => m.EMPLOYE_ROUTES)
-      },
+      }
     ],
   },
   { path: '', pathMatch: 'full', redirectTo: '/client' }

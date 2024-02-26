@@ -3,9 +3,10 @@ const router = express.Router();
 const Employe = require('../models/Employe');
 const RendezVous = require('../models/RendezVous');
 const Depense = require('../models/Depense');
+const Utilitaire = require('../utils/utilitaire');
 
 // Temps moyen de travail pour chaque employé
-router.get('/temps-travail', async (req, res) => {
+router.get('/temps-travail',Utilitaire.verifyToken, async (req, res) => {
   try {
     const result = await Employe.aggregate([
       {
@@ -61,8 +62,11 @@ router.get('/temps-travail', async (req, res) => {
 });
 
 // Le nombre de réservations par jour
-router.get('/reservations-jour', async (req, res) => {
+router.get('/reservations-jour',Utilitaire.verifyToken, async (req, res) => {
   try {
+    if (req.user.role !=='admin'){
+      return res.status(401).json({ message: 'Token invalide' });
+    }
     const result = await RendezVous.aggregate([
       {
         $group: {
@@ -83,7 +87,7 @@ router.get('/reservations-jour', async (req, res) => {
 });
 
 // Le nombre de réservations par mois
-router.get('/reservations-mois', async (req, res) => {
+router.get('/reservations-mois', Utilitaire.verifyToken,async (req, res) => {
   try {
     const result = await RendezVous.aggregate([
       {
@@ -104,7 +108,7 @@ router.get('/reservations-mois', async (req, res) => {
 });
 
 // Chiffre d’affaires par jour
-router.get('/chiffre-affaires-jour', async (req, res) => {
+router.get('/chiffre-affaires-jour',Utilitaire.verifyToken, async (req, res) => {
   try {
     const result = await RendezVous.aggregate([
       {
@@ -173,7 +177,7 @@ router.get('/chiffre-affaires-jour', async (req, res) => {
 });
 
 // Chiffre d’affaires par mois
-router.get('/chiffre-affaires-mois', async (req, res) => {
+router.get('/chiffre-affaires-mois',Utilitaire.verifyToken, async (req, res) => {
   try {
     const result = await getChiffreAffairesParMois();
     res.json(result);
@@ -184,7 +188,7 @@ router.get('/chiffre-affaires-mois', async (req, res) => {
 });
 
 // Bénéfice par mois en entrant les dépenses
-router.get('/benefice-mois', async (req, res) => {
+router.get('/benefice-mois',Utilitaire.verifyToken, async (req, res) => {
   try {
     const chiffreAffairesParMois = await getChiffreAffairesParMois();
     const depensesTotalesParMois = await getDepensesTotalesParMois();
