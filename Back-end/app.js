@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 require('dotenv').config();
 var logger = require('morgan');
 const cors = require('cors');
+const cron = require('node-cron');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -17,6 +18,7 @@ var statsRouter = require('./routes/stats');
 var payementRouter= require('./routes/Payement');
 var managerRouter=require('./routes/manager');
 var db = require('./utils/db');
+const Cron = require('./utils/cron');
 
 var app = express();
 
@@ -38,5 +40,9 @@ app.use('/rdv', rdvRouter);
 app.use('/stats', statsRouter);
 app.use('/payement', payementRouter);
 app.use('/admin', managerRouter);
+
+cron.schedule('0 10 * * *', async () => {
+    Cron.createCron();
+});
 
 module.exports = app;
