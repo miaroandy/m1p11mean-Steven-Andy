@@ -9,25 +9,22 @@
 
                 <nav class="menu">
                     <ul>
-                        <li><a routerLink="/home">Accueil</a></li>
-                        <li>
-                            <a href="#">Produits</a>
-                            <ul class="submenu">
-                                <li><a routerLink="/products">Tous les produits</a></li>
-                                <li><a routerLink="/categories">Catégories</a></li>
-                                <li><a routerLink="/brands">Marques</a></li>
-                            </ul>
-                        </li>
-                        <li><a routerLink="/about">À propos</a></li>
-                        <li>
-                            <a href="#">Compte</a>
-                            <ul class="submenu">
-                                <li><a routerLink="/profile">Profil</a></li>
-                                <li><a routerLink="/orders">Commandes</a></li>
-                                <li><a routerLink="/settings">Paramètres</a></li>
-                            </ul>
-                        </li>
-                        <li><a routerLink="/contact">Contact</a></li>
+                        <li><a (click)="navigate('/admin')" class="lien">
+                                <span class="icone" nz-icon nzType="calendar" nzTheme="outline"></span>
+                                <span>Rendez-vous</span>
+                            </a></li>
+                        <li><a (click)="navigate('/client/profil')" class="lien">
+                                <span class="icone" nz-icon nzType="user" nzTheme="outline"></span>
+                                <span>Mon profil</span>
+                            </a></li>
+                        <li><a (click)="navigate('/client/profil')" class="lien">
+                                <span class="icone" nz-icon nzType="ordered-list" nzTheme="outline"></span>
+                                <span>Suivi des tâches</span>
+                            </a></li>
+                        <li><a (click)="seDeconnecter()" class="lien">
+                                <span class="icone" nz-icon nzType="logout" nzTheme="outline"></span>
+                                <span>Se déconnecter</span>
+                            </a></li>
                     </ul>
                 </nav>
 

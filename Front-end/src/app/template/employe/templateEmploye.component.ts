@@ -5,7 +5,7 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 
@@ -17,5 +17,16 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
     styleUrls: ['./templateEmploye.component.css']
 })
 export class TemplateEmployeComponent {
+
+    constructor(private router: Router) { }
+
+    navigate(lien: string) {
+        this.router.navigate([lien]);
+    }
+
+    seDeconnecter() {
+        localStorage.clear();
+        this.router.navigate(['login/employe']);
+    }
 
 }
