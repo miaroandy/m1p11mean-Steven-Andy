@@ -286,7 +286,14 @@ async function getDepensesTotalesParMois() {
     {
       $group: {
         _id: { month: { $month: "$date" }, year: { $year: "$date" } },
-        totalDepenses: { $sum: { $add: ["$salaire", "$loyer", "$achat_piece", "$autres_depenses"] } }
+        totalDepenses: { $sum: { 
+          $add: [
+            { $ifNull: ["$salaire", 0] },
+            { $ifNull: ["$loyer", 0] },
+            { $ifNull: ["$achat_piece", 0] },
+            { $ifNull: ["$autres_depenses", 0] }
+          ] }
+        }
       }
     },
     {
