@@ -9,6 +9,18 @@ router.get('/', async (req, res) => {
     res.json(rdv);
 });
 
+router.get('/employe/:id', Utilitaire.verifyToken,async (req, res) => {
+    if (req.user.role!=='employe'){
+        return res.status(401).json({ message: 'Token invalide' });
+    }
+    const rdv = await RendezVous.find({employe: req.params.id}).populate([
+        { path: 'service', select: '-photo' },
+        { path:'client'}
+    ]);
+    console.log(rdv)
+    res.json(rdv);
+});
+
 router.get('/historique/:idclient', async (req, res) => {
     const rdv = await RendezVous.find({ client: req.params.idclient }).populate([
         { path: 'service' },

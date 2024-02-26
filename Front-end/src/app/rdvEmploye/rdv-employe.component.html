@@ -1,0 +1,13 @@
+<nz-calendar>
+    <ul *nzDateCell="let date" class="events">
+        @for( item of rdv; track $index){
+            
+            @if(date==item.date){
+                <li>
+                    <nz-badge nzStatus="success" [nzText]="item.service.nom"></nz-badge>
+                </li>
+            }
+        }
+    </ul>
+    
+</nz-calendar>

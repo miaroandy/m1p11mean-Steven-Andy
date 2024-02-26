@@ -15,8 +15,8 @@ import { RendezVous } from '../model/RendezVous';
     providedIn: 'root',
 })
 export class CallAPI {
-    apiUrl = 'https://salon-beaute-service.onrender.com/';
-    //apiUrl = 'http://localhost:3000/';
+    //apiUrl = 'https://salon-beaute-service.onrender.com/';
+    apiUrl = 'http://localhost:3000/';
 
     constructor(private http: HttpClient,
         private router: Router){ }
@@ -26,6 +26,18 @@ export class CallAPI {
         return this.http.get<RendezVous[]>(url).pipe(
             tap((response) => this.log(response)),
             catchError((error) => this.handleError(error, [],1))
+        );
+    }
+
+    getRDVemploye():Observable<RendezVous[]>{
+        const url= this.apiUrl + "rdv/employe/"+ localStorage.getItem('identifiant');
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<RendezVous[]>(url, { headers }).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, [], 3))
         );
     }
 
