@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Employe } from '../model/Employe';
 import { OffreSpeciale, Service } from '../model/Service';
@@ -230,6 +230,12 @@ export class CallAPI {
     getAllServices(): Observable<Service[]> {
         const url = this.apiUrl + "services";
         return this.http.get<Service[]>(url);
+    }
+
+    getFilteredServices(queryParams: any): Observable<Service[]> {
+        const url = this.apiUrl + "services/filter";
+        const params = new HttpParams({ fromObject: queryParams });
+        return this.http.get<Service[]>(url, { params });
     }
 
     getAllServicesHome(): Observable<Service[]> {

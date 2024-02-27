@@ -1,5 +1,51 @@
 <h1 nz-typography style="text-align: center; color: #1890ff;">Liste service</h1>
+
+<div style="display: flex; justify-content: center; margin-bottom: 15px;">
+  <form (ngSubmit)="filterServices()" #filterForm="ngForm" style="display: flex; flex-direction: row; align-items: flex-end;">
+    <div style="margin-right: 10px;">
+      <label for="nom">Nom:</label>
+      <input nz-input placeholder="Nom" nzSize="large" type="text" id="nom" name="nom" [(ngModel)]="filterParams.nom">
+    </div>
+
+    <div style="margin-right: 10px;">
+      <label for="prixMin">Prix Min:</label>
+      <input nz-input placeholder="Prix min" nzSize="large" type="number" id="prixMin" name="prixMin" [(ngModel)]="filterParams.prixMin">
+    </div>
+
+    <div style="margin-right: 10px;">
+      <label for="prixMax">Prix Max:</label>
+      <input nz-input placeholder="Prix max" nzSize="large" type="number" id="prixMax" name="prixMax" [(ngModel)]="filterParams.prixMax">
+    </div>
+
+    <div style="margin-right: 10px;">
+      <label for="taux_commission">Taux de commission:</label>
+      <input nz-input placeholder="Taux de commission" nzSize="large" type="number" id="taux_commission" name="taux_commission" [(ngModel)]="filterParams.taux_commission">
+    </div>
+
+    <div style="margin-right: 10px;">
+      <label for="dureeMin">Durée Min:</label>
+      <input nz-input placeholder="Durée min" nzSize="large" type="number" id="dureeMin" name="dureeMin" [(ngModel)]="filterParams.dureeMin">
+    </div>
+
+    <div style="margin-right: 10px;">
+      <label for="dureeMax">Durée Max:</label>
+      <input nz-input placeholder="Durée max" nzSize="large" type="number" id="dureeMax" name="dureeMax" [(ngModel)]="filterParams.dureeMax">
+    </div>
+
+    <div  style="margin-right: 10px;">
+      <button type="button" (click)="onReset()" nz-button nzType="default" nzSize="large" nzShape="round">Effacer</button>
+    </div>
+
+    <div>
+      <button type="submit" nz-button nzType="primary" nzSize="large" nzShape="round">Filtrer</button>
+    </div>
+
+  </form>
+
+</div>
+
 <div *ngIf="!loading">
+
   <nz-table #borderedTable nzBordered nzFooter="{{nbrServices}} résultats" nzTitle="Liste des services" [nzData]="services">
       <thead>
           <tr>

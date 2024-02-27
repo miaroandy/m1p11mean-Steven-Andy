@@ -28,6 +28,45 @@ router.get('/home', async (req, res) => {
   res.json(services);
 });
 
+router.get('/filter', async (req, res) => {
+  try {
+    const filterOptions = {};
+    if (req.query.nom) {
+      filterOptions.nom = { $regex: new RegExp(req.query.nom, 'i') };
+    }
+
+    if (!isNaN(req.query.prixMin) && !isNaN(req.query.prixMax)) {
+      filterOptions.prix = { $gte: parseFloat(req.query.prixMin), $lte: parseFloat(req.query.prixMax) };
+    } else if (!isNaN(req.query.prixMin)) {
+      filterOptions.prix = { $gte: parseFloat(req.query.prixMin) };
+    } else if (!isNaN(req.query.prixMax)) {
+      filterOptions.prix = { $lte: parseFloat(req.query.prixMax) };
+    }
+
+    if (!isNaN(req.query.taux_commission)) {
+      filterOptions.taux_commission = { $eq: parseFloat(req.query.taux_commission / 100) };
+    }
+
+    if (!isNaN(req.query.dureeMin) && !isNaN(req.query.dureeMax)) {
+      filterOptions.duree = { $gte: parseInt(req.query.dureeMin), $lte: parseInt(req.query.dureeMax) };
+    } else if (!isNaN(req.query.dureeMin)) {
+      filterOptions.duree = { $gte: parseInt(req.query.dureeMin) };
+    } else if (!isNaN(req.query.dureeMax)) {
+      filterOptions.duree = { $lte: parseInt(req.query.dureeMax) };
+    }
+
+    if (Object.keys(filterOptions).length === 0) {
+      const allServices = await Service.find();
+      return res.json(allServices);
+    }
+
+    const services = await Service.find(filterOptions);
+    res.json(services);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 router.get('/', async (req, res) => {
   const services = await Service.find();
   res.json(services);
@@ -43,8 +82,6 @@ router.get('/:id', getService, (req, res) => {
   res.json(res.service);
 });
 
-
-
 router.delete('/:id', async (req, res) => {
   try {
     await res.service.remove();
@@ -53,7 +90,6 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-
 
 router.post('/:id/offreSpeciale', getService, async (req, res) => {
   try {
