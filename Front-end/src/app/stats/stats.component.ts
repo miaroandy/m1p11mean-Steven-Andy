@@ -9,6 +9,7 @@ import { Chart } from 'chart.js/auto';
 import { NgChartsModule } from 'ng2-charts';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { SpinnerComponent } from '../component/spinner/spinner.component';
 
 @Component({
   selector: 'app-stats',
