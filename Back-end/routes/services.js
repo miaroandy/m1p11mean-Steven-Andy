@@ -53,6 +53,22 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+
+router.post('/:id/offreSpeciale', getService, async (req, res) => {
+  try {
+    const service = res.service;
+
+    const nouvelleOffreSpeciale = req.body;
+
+    service.offres_speciales.push(nouvelleOffreSpeciale);
+    await service.save();
+
+    res.status(201).json(service);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
 async function getService(req, res, next) {
   let service;
   try {
