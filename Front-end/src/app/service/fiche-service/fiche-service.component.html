@@ -29,15 +29,41 @@
 </div>
 <br>
 <br>
-<div *ngIf="!loading && offres.length > 0">
+<div>
     <h3 nz-typography style="text-align: center; color: #1890ff;">Offres spéciales</h3>
-    <div style="padding:30px;">
-        <div nz-row [nzGutter]="8">
-            <div nz-col [nzSpan]="4" *ngfor="let offre of offres">
-                <nz-card nzTitle="{{offre.date_debut}} - {{offre.date_fin}}">
-                    <p> {{offre.reduction}} </p>
-                </nz-card>
-            </div>
+    <div style="display: flex; justify-content: center;">
+      <form #offreForm="ngForm" style="display: flex; flex-direction: row; align-items: flex-end;">
+        <div style="margin-right: 10px;">
+          <h4>Début : </h4>
+          <input nz-input placeholder="Début" [(ngModel)]="newOffreSpeciale.datedebut" name="datedebut" type="date" nzSize="large" />
         </div>
+
+        <div style="margin-right: 10px;">
+          <h4>Fin : </h4>
+          <input nz-input placeholder="Fin" [(ngModel)]="newOffreSpeciale.datefin" name="datefin" type="date" nzSize="large" />
+        </div>
+
+        <div style="margin-right: 10px;">
+          <h4>Réduction %: </h4>
+          <input nz-input placeholder="Réduction" [(ngModel)]="newOffreSpeciale.reduction" name="reduction" type="number" nzSize="large" />
+        </div>
+
+        <div>
+          <button (click)="addOffre()" type="button" nz-button nzType="primary" nzSize="large" nzShape="round">Ajouter</button>
+        </div>
+      </form>
     </div>
+
+    <div *ngIf="!loading && offres.length > 0" style="padding: 30px;">
+      <div nz-row [nzGutter]="8">
+        <ng-container *ngFor="let offre of offres">
+          <div nz-col [nzSpan]="6" style="text-align: center;">
+            <nz-card nzTitle="{{offre.datedebut | date:'dd/MM/yyyy'}} - {{offre.datefin | date:'dd/MM/yyyy'}}">
+              <p> Réduction de {{offre.reduction*100}} % </p>
+            </nz-card>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
 </div>

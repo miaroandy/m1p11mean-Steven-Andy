@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Employe } from '../model/Employe';
-import { Service } from '../model/Service';
+import { OffreSpeciale, Service } from '../model/Service';
 import { Observable,tap,catchError,of } from 'rxjs';
 import { Token } from '../model/Token';
 import { Login } from '../model/Login';
@@ -252,6 +252,11 @@ export class CallAPI {
     saveService(service: Service): any{
         const url = this.apiUrl + "services";
         return this.http.post(url, service.toJSON());
+    }
+
+    saveOffre(idservice: string, offre: OffreSpeciale): any{
+        const url = this.apiUrl + "services/" + idservice + "/offreSpeciale";
+        return this.http.post(url, offre.toJSON());
     }
 
     getAllDepenses(): Observable<Depense[]> {

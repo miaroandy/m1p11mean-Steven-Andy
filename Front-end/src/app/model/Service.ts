@@ -35,4 +35,9 @@ export class OffreSpeciale {
     this.datefin = new Date();
     this.reduction = 0;
   }
+
+  toJSON(): any {
+    const { _id, ...autresAttributs } = this;
+    return autresAttributs;
+  }
 }
