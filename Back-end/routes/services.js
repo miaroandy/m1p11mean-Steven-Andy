@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const Service = require('../models/Service');
 const Utilitaire = require('../utils/utilitaire');
+const Mail = require('../utils/mail');
 
 router.post('/', async (req, res) => {
   try {
@@ -63,6 +64,8 @@ router.post('/:id/offreSpeciale', getService, async (req, res) => {
     service.offres_speciales.push(nouvelleOffreSpeciale);
     await service.save();
 
+    Utilitaire.notificationOffresSpeciales(service,nouvelleOffreSpeciale);
+    
     res.status(201).json(service);
   } catch (err) {
     res.status(400).json({ message: err.message });

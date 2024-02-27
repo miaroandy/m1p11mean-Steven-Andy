@@ -2,9 +2,34 @@ const jwt = require('jsonwebtoken');
 const Service = require('../models/Service');
 const Employe = require('../models/Employe');
 const RendezVous = require('../models/RendezVous');
+const Client = require('../models/Client');
+const Mail = require('./mail');
 const secret_key = process.env.secretKey;
 
 class Utilitaire {
+
+    static async notificationOffresSpeciales(service,offresSpeciales){
+        const client= await Client.find();
+
+        let recipient="";
+        let indice=0;
+        client.forEach(element => {
+            if(indice==0){
+                recipient=element.email;
+                indice=1;
+            }else{
+                recipient=recipient+","+element.email;
+            }
+        });
+        console.log(recipient);
+
+        const prix=service.prix-(service.prix*offresSpeciales.reduction);
+
+        const htmlbody = "<h2>Une nouvelle offre spéciale</h2><p>Réduction de <strong>"+offresSpeciales.reduction+"</strong> sur tous les "+service.nom+".</p>      <p> "+service.nom+" à seulement <strong>"+prix+"</strong>.</p>      <p>Profitez de ces offres exclusives dès le <strong>"+offresSpeciales.datedebut+"</strong> jusqu'au <strong>"+offresSpeciales.datefin+"</strong></p>";
+
+        const mail = new Mail(recipient, 'Offres Spéciales')
+        mail.sendMail(htmlbody);
+    }
     
     static verifyToken(req, res, next) {
         const bearer = req.headers.authorization;
