@@ -1,0 +1,87 @@
+<h1 nz-typography style="text-align: center; color: #1890ff;">Mon Profil</h1>
+<div *ngIf="loading" style="text-align: center; margin-top: 100px;">
+    <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+</div>
+<div nz-row *ngIf="!loading">
+    <div nz-col nzSpan="8"></div>
+
+    <div nz-col nzSpan="8">
+
+        <nz-card style="width:100%; text-align: center;" [nzActions]="[ actionEdit,actionDelete]">
+            <nz-card-meta nzTitle="{{employe.nom}} {{employe.prenom}}" nzDescription="{{employe.email}}"></nz-card-meta>
+        </nz-card>
+        <ng-template #actionEdit>
+            <span nz-icon nzType="edit"></span>
+        </ng-template>
+        <ng-template #actionDelete>
+            <span nz-icon nzType="delete" nzTheme="outline"></span>
+        </ng-template>
+    </div>
+
+    <div nz-col nzSpan="8"></div>
+
+</div>
+<br>
+<br>
+<div *ngIf="!loading">
+    <h3 nz-typography style="text-align: center; color: #1890ff;">Horaire de travail</h3>
+    <div style="padding:30px;">
+        <div nz-row [nzGutter]="8">
+            <div nz-col [nzSpan]="4">
+                <nz-card nzTitle="Lundi">
+                    <p *ngIf="horaire.get('lundi')"> {{horaire.get('lundi')}} </p>
+                    <p *ngIf="!horaire.get('lundi')"> Ne travail pas </p>
+                    <button nz-button nzType="primary" (click)="showModal('lundi')">Modifier</button>
+                </nz-card>
+            </div>
+            <div nz-col [nzSpan]="4">
+                <nz-card nzTitle="Mardi">
+                    <p *ngIf="horaire.get('mardi')"> {{horaire.get('mardi')}} </p>
+                    <p *ngIf="!horaire.get('mardi')"> Ne travail pas </p>
+                    <button nz-button nzType="primary" (click)="showModal('mardi')">Modifier</button>
+                </nz-card>
+            </div>
+            <div nz-col [nzSpan]="4">
+                <nz-card nzTitle="Mercredi">
+                    <p *ngIf="horaire.get('mercredi')"> {{horaire.get('mercredi')}} </p>
+                    <p *ngIf="!horaire.get('mercredi')"> Ne travail pas </p>
+                    <button nz-button nzType="primary" (click)="showModal('mercredi')">Modifier</button>
+                </nz-card>
+            </div>
+            <div nz-col [nzSpan]="4">
+                <nz-card nzTitle="Jeudi">
+                    <p *ngIf="horaire.get('jeudi')"> {{horaire.get('jeudi')}} </p>
+                    <p *ngIf="!horaire.get('jeudi')"> Ne travail pas </p>
+                    <button nz-button nzType="primary" (click)="showModal('jeudi')">Modifier</button>
+                </nz-card>
+            </div>
+            <div nz-col [nzSpan]="4">
+                <nz-card nzTitle="Vendredi">
+                    <p *ngIf="horaire.get('vendredi')"> {{horaire.get('vendredi')}} </p>
+                    <p *ngIf="!horaire.get('vendredi')"> Ne travail pas </p>
+                    <button nz-button nzType="primary" (click)="showModal('vendredi')">Modifier</button>
+                </nz-card>
+            </div>
+            <div nz-col [nzSpan]="4">
+                <nz-card nzTitle="Samedi">
+                    <p *ngIf="horaire.get('samedi')"> {{horaire.get('samedi')}} </p>
+                    <p *ngIf="!horaire.get('samedi')"> Ne travail pas </p>
+                    <button nz-button nzType="primary" (click)="showModal('samedi')">Modifier</button>
+                </nz-card>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Modification d'horaire de travail" (nzOnCancel)="handleCancel()">
+    <div *nzModalContent>
+        <p>Debut: <span class="debut"><nz-time-picker [(ngModel)]="debut"  ></nz-time-picker></span></p>
+        <p>Fin: <span class="fin"><nz-time-picker [(ngModel)]="fin" ></nz-time-picker></span></p>
+        
+    </div>
+    <div *nzModalFooter>
+        <button nz-button nzType="default" (click)="handleCancel()">Retour</button>
+        <button nz-button nzType="primary" (click)="handleOk(1)" [nzLoading]="isConfirmLoading">Modifier</button>
+        <button nz-button nzType="default" nzDanger (click)="handleOk(2)" [nzLoading]="isConfirmLoading">Ne pas travailler</button>
+    </div>
+</nz-modal>

@@ -104,6 +104,30 @@ export class CallAPI {
         );
     }
 
+    majHoraireTravail(horaire: any):Observable<string>{
+        const url = this.apiUrl + "employe/"+localStorage.getItem("identifiant")+"/horaire";
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.post<string>(url, horaire, { headers }).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, [], 3))
+        );
+    }
+
+    deleteHoraireTravail(horaire: any):Observable<string>{
+        const url = this.apiUrl + "employe/" + localStorage.getItem("identifiant") + "/horaire/delete";
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.post<string>(url, horaire, { headers }).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, [], 3))
+        );
+    }
+
     ajoutRDV(rdv: any): Observable<RendezVous> {
         const url = this.apiUrl + "rdv";
         const token = localStorage.getItem('token');
