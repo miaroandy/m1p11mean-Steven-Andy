@@ -49,7 +49,6 @@ export class FicheServiceComponent implements OnInit {
       // Envoyez le service avec la photo à votre API
       this.newOffreSpeciale.reduction /= 100;
       this.offres.push(this.newOffreSpeciale);
-      this.newOffreSpeciale = new OffreSpeciale();
       this.callAPI.saveOffre(this.id, this.newOffreSpeciale).subscribe(
         (data: any) => {
 
@@ -59,5 +58,6 @@ export class FicheServiceComponent implements OnInit {
           this.loading = false;
         }
       );
+      this.newOffreSpeciale = new OffreSpeciale();
     }
 }
