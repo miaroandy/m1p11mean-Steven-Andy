@@ -41,6 +41,18 @@ export class CallAPI {
         );
     }
 
+    finirRDV(id: string):Observable<string>{
+        const url = this.apiUrl + "rdv/"+id+"/finir";
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<string>(url, { headers }).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, [], 3))
+        );
+    }
+
     getFicheServiceSpecial(id: string): Observable<Service> {
         const url = this.apiUrl + "services/"+id+"/special";
         const token = localStorage.getItem('token');

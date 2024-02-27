@@ -15,10 +15,19 @@ router.get('/employe/:id', Utilitaire.verifyToken,async (req, res) => {
     }
     const rdv = await RendezVous.find({employe: req.params.id}).populate([
         { path: 'service', select: '-photo' },
-        { path:'client'}
-    ]);
+        { path: 'client'}
+    ]).sort({date: 1});
     console.log(rdv)
     res.json(rdv);
+});
+
+router.get('/:id/finir', async (req, res) => {
+    const rdv = await RendezVous.findOneAndUpdate(
+        { _id: req.params.id },
+        { statut: 2 },
+        { new: true }
+    );
+    res.json("OK");
 });
 
 router.get('/historique/:idclient', async (req, res) => {
