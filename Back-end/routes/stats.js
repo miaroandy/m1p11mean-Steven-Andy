@@ -77,6 +77,9 @@ router.get('/reservations-jour',Utilitaire.verifyToken, async (req, res) => {
           },
           nombre_reservations: { $sum: 1 }
         }
+      },
+      {
+        $sort: { "_id.year": 1, "_id.month": 1, "_id.day": 1 }
       }
     ]);
     res.json(result);
@@ -98,6 +101,9 @@ router.get('/reservations-mois', Utilitaire.verifyToken,async (req, res) => {
           },
           nombre_reservations: { $sum: 1 }
         }
+      },
+      {
+        $sort: { "_id.year": 1, "_id.month": 1}
       }
     ]);
     res.json(result);
@@ -152,9 +158,15 @@ router.get('/chiffre-affaires-jour',Utilitaire.verifyToken, async (req, res) => 
                       }
                     },
                     in: {
-                      $multiply: [
-                        "$service_info.prix",
-                        { $subtract: [1, { $divide: ["$$matchingOffer.reduction", 100] }] }
+                      $cond: [
+                        { $ifNull: ["$$matchingOffer.reduction", false] },
+                        {
+                          $multiply: [
+                            "$service_info.prix",
+                            { $subtract: [1, { $divide: ["$$matchingOffer.reduction", 1] }] }
+                          ]
+                        },
+                        "$service_info.prix"
                       ]
                     }
                   }
@@ -261,9 +273,15 @@ async function getChiffreAffairesParMois() {
                     }
                   },
                   in: {
-                    $multiply: [
-                      "$service_info.prix",
-                      { $subtract: [1, { $divide: ["$$matchingOffer.reduction", 100] }] }
+                    $cond: [
+                      { $ifNull: ["$$matchingOffer.reduction", false] },
+                      {
+                        $multiply: [
+                          "$service_info.prix",
+                          { $subtract: [1, { $divide: ["$$matchingOffer.reduction", 1] }] }
+                        ]
+                      },
+                      "$service_info.prix"
                     ]
                   }
                 }
