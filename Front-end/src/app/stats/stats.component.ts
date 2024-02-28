@@ -100,6 +100,13 @@ export class StatsComponent {
   createTempsMoyenTravailChart(): void {
     const noms = this.tempsTravailMoyen.map(stat => stat.nom);
     const temps_moyen_travail = this.tempsTravailMoyen.map(stat => stat.temps_moyen_travail);
+    const predefinedColors = [
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(75, 192, 192, 0.4)',
+      'rgba(75, 192, 192, 0.6)',
+      'rgba(75, 192, 192, 0.8)',
+      'rgba(75, 192, 192, 1.0)'
+    ];
 
     new Chart("tempsMoyenTravailChart", {
       type: 'doughnut',
@@ -108,7 +115,7 @@ export class StatsComponent {
         datasets: [{
           label: 'Temps moyen de travail',
           data: temps_moyen_travail,
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          backgroundColor: predefinedColors,
           hoverOffset: 4
         }]
       },

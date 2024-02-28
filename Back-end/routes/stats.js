@@ -6,7 +6,7 @@ const Depense = require('../models/Depense');
 const Utilitaire = require('../utils/utilitaire');
 
 // Temps moyen de travail pour chaque employé
-router.get('/temps-travail',Utilitaire.verifyToken, async (req, res) => {
+router.get('/temps-travail', Utilitaire.verifyToken, async (req, res) => {
   try {
     const result = await Employe.aggregate([
       {
@@ -17,8 +17,8 @@ router.get('/temps-travail',Utilitaire.verifyToken, async (req, res) => {
           _id: "$_id",
           nom: { $first: "$nom" },
           prenom: { $first: "$prenom" },
-          temps_moyen_travail: {
-            $avg: {
+          total_temps_travail: {
+            $sum: {
               $subtract: [
                 {
                   $hour: {
@@ -51,6 +51,14 @@ router.get('/temps-travail',Utilitaire.verifyToken, async (req, res) => {
               ]
             }
           }
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          nom: 1,
+          prenom: 1,
+          temps_moyen_travail: { $divide: ["$total_temps_travail", 6] }
         }
       }
     ]);
