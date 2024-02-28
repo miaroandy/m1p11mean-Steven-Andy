@@ -5,8 +5,17 @@ const RendezVous = require('../models/RendezVous');
 const Client = require('../models/Client');
 const Mail = require('./mail');
 const secret_key = process.env.secretKey;
+const crypto = require('crypto');
 
 class Utilitaire {
+
+    static cryptMDP(mdp) {
+        const hash = crypto.createHash('sha256');
+        hash.update(mdp);
+        const hashHex = hash.digest('hex');
+        return hashHex;
+    }
+
 
     static async notificationOffresSpeciales(service,offresSpeciales){
         const client= await Client.find();

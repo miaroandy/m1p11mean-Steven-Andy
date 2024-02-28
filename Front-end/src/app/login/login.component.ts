@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit{
     login: Login=new Login();
     loading=false;
     loginError=false;
+    etat=0;
 
     constructor(
         private callAPI: CallAPI,
@@ -32,14 +33,17 @@ export class LoginComponent implements OnInit{
         if(this.login.role=='client'){
             this.login.email='ravaosoa@gmail.com';
             this.login.mdp='test';
+            this.etat=1;
         }
         if (this.login.role == 'admin') {
             this.login.email = 'admin@gmail.com';
             this.login.mdp = 'admin';
+            this.etat=2;
         }
         if (this.login.role == 'employe') {
             this.login.email = 'jeanpaul@gmail.com';
             this.login.mdp = 'jeanpaul';
+            this.etat=3;
         }
     }
 
@@ -57,7 +61,7 @@ export class LoginComponent implements OnInit{
 
     onClick(){
         this.loading=true;
-        this.callAPI.login(this.login).subscribe(
+        this.callAPI.login(this.login,this.etat).subscribe(
             (data: any) => {
                 if(data.length==0){
                     this.erreur();

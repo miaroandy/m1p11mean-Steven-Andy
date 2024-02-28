@@ -3,9 +3,11 @@ var router = express.Router();
 const Employe = require('../models/Employe');
 const Service = require('../models/Service');
 const RendezVous = require('../models/RendezVous');
+const Utilitaire = require('../utils/utilitaire');
 
 router.post('/', async (req, res) => {
 try {
+    req.body.mot_de_passe= Utilitaire.cryptMDP(req.body.mot_de_passe);
     const service = new Employe(req.body);
     await service.save();
     res.status(201).json(service);

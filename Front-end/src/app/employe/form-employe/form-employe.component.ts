@@ -28,9 +28,10 @@ export class FormEmployeComponent {
 
   onClick(){
     this.loading = true;
+    this.employe.mot_de_passe='motdepasse';
     this.callAPI.saveEmploye(this.employe).subscribe(
       (data: any) => {
-        this.router.navigate(['/employe'])
+        this.router.navigate(['/admin/employe'])
         this.loading=false;
       },
       (error: any) => {
