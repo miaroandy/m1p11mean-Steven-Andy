@@ -158,6 +158,11 @@ export class CallAPI {
         return this.http.get<Service[]>(url);
     }
 
+    getPromotion(): Observable<Service[]> {
+        const url = this.apiUrl + "services/promotion";
+        return this.http.get<Service[]>(url);
+    }
+
     login(user: Login): Observable<Token>{
         const url = this.apiUrl + "login";
         return this.http.post<Token>(url,user).pipe(

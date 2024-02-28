@@ -48,3 +48,15 @@
         <spinner-root [loading]="loadingOffres" />
     </div>
 </div>
+
+<div class="services-section">
+    <div class="container">
+        <h2>Nos Offres Spéciales à venir</h2>
+        <div *ngIf="!loadingPromotion" class="services-grid">
+            <div *ngFor="let item of promotion" (click)="navigate(item._id)">
+                <promotion-service [service]="item" />
+            </div>
+        </div>
+        <spinner-root [loading]="loadingPromotion" />
+    </div>
+</div>

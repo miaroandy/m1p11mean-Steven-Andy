@@ -1,0 +1,22 @@
+.service-item {
+    background-color: #fff !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    padding: 20px !important;
+    text-align: center !important;
+}
+
+.service-item img {
+    max-width: 400px !important;
+    width: 100% !important;
+    border-radius: 8px !important;
+    margin-bottom: 10px !important;
+}
+
+.service-item h3 {
+    color: #009688 !important;
+}
+
+strong {
+    color: #009688 !important;
+}
