@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const Employe = require('../models/Employe');
+const Service = require('../models/Service');
+const RendezVous = require('../models/RendezVous');
 
 router.post('/', async (req, res) => {
 try {
@@ -10,6 +12,17 @@ try {
 } catch (err) {
     res.status(400).json({ message: err.message });
 }
+});
+
+router.get('/:id/tache', async (req, res) => {
+    const rdv = await RendezVous.find({
+        employe: req.params.id,
+        statut: 2
+    }).populate([
+        { path: 'service', select: '-photo'},
+        { path: 'client', select:'-preferences'}
+    ]);
+    res.json(rdv);
 });
 
 router.post('/:id/horaire/delete', async (req, res) => {

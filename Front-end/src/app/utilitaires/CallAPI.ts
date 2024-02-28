@@ -128,6 +128,18 @@ export class CallAPI {
         );
     }
 
+    getTacheEffectuee():Observable<RendezVous[]>{
+        const url = this.apiUrl + "employe/" + localStorage.getItem("identifiant") + "/tache";
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<RendezVous[]>(url, { headers }).pipe(
+            tap((response) => this.log(response)),
+            catchError((error) => this.handleError(error, [], 3))
+        );
+    }
+
     ajoutRDV(rdv: any): Observable<RendezVous> {
         const url = this.apiUrl + "rdv";
         const token = localStorage.getItem('token');
