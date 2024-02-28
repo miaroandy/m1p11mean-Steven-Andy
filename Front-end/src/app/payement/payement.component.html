@@ -17,6 +17,16 @@
             <img src="{{item.service.photo}}" alt="{{item.service.nom}}">
         </div>
     </div>
+    <div *ngIf="rdv.length==0" class="empty">
+        <nz-empty nzNotFoundImage="simple"
+            [nzNotFoundContent]="contentTpl" >
+            <ng-template #contentTpl>
+                <span>
+                    Tout est payé
+                </span>
+            </ng-template>
+        </nz-empty>
+    </div>
 
     <nz-modal [(nzVisible)]="isVisible" nzTitle=""
         (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">

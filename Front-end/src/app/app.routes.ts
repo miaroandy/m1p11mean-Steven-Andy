@@ -9,6 +9,8 @@ import { TemplateAdminComponent } from './template/admin/templateAdmin.component
 import { HomeServiceComponent } from './homeService/home-service.component';
 import { PayementComponent } from './payement/payement.component';
 import { RdvEmployeComponent } from './rdvEmploye/rdv-employe.component';
+import { ProfilEmployeComponent } from './employe/profil-employe/profil-employe.component';
+import { TacheEmployeComponent } from './suiviTache/tache.component';
 
 export const routes: Routes = [
   { path: 'login/:role', component: LoginComponent },
@@ -17,6 +19,12 @@ export const routes: Routes = [
     children: [
       {
         path: '', component: RdvEmployeComponent
+      },
+      {
+        path: 'profil', component: ProfilEmployeComponent
+      },
+      {
+        path: 'tache', component: TacheEmployeComponent
       }
     ],
   },

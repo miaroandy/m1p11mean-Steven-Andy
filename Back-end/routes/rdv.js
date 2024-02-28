@@ -1,6 +1,8 @@
 var express = require('express');
 const RendezVous = require('../models/RendezVous');
 const Utilitaire = require('../utils/utilitaire');
+const Employe = require('../models/Employe');
+const Service = require('../models/Service');
 var router = express.Router();
 
 
@@ -27,6 +29,19 @@ router.get('/:id/finir', async (req, res) => {
         { statut: 2 },
         { new: true }
     );
+
+    const service= await Service.findById(rdv.service).select('-photo').exec();
+    const tache={
+        rdv: rdv._id,
+        montant_commission: service.prix*service.taux_commission
+    }
+
+    const emp= await Employe.findByIdAndUpdate(
+        rdv.employe,
+        { $push: { taches_effectuees: tache } },
+        { new: true }
+    );
+
     res.json("OK");
 });
 
