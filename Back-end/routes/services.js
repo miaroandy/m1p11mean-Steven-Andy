@@ -19,6 +19,11 @@ router.get('/offreSpecial', async (req, res) => {
   res.json(services);
 });
 
+router.get('/promotion', async (req, res) => {
+  const services = await Utilitaire.getPromotion(new Date());
+  res.json(services);
+});
+
 router.get('/home', async (req, res) => {
   const date=new Date();
   const services = await Service.find();
@@ -29,7 +34,7 @@ router.get('/home', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-  const services = await Service.find();
+  const services = await Service.find().select('-photo');
   res.json(services);
 });
 

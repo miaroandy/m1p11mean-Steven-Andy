@@ -125,6 +125,20 @@ class Utilitaire {
         });
         return offres;
     }
+
+    static async getPromotion(date) {
+        const offres = await Service.find({
+            'offres_speciales': {
+                $elemMatch: {
+                    datedebut: { $gte: date }
+                }
+            }
+        }).sort({ 'offres_speciales.datedebut': 1 });
+        offres.forEach(element => {
+            element.offres_speciales = element.offres_speciales.filter(item => item.datedebut > date);
+        });
+        return offres;
+    }
 }
 
 module.exports = Utilitaire;

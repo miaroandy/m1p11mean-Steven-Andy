@@ -10,13 +10,14 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { FormsModule } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Router } from '@angular/router';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 
 
 @Component({
     selector: 'home-service',
     templateUrl: './payement.component.html',
     standalone: true,
-    imports: [NgFor, NgIf, SpinnerComponent,FormsModule, NzDatePickerModule,NzTypographyModule, CommonModule, NzSelectModule,NzModalModule],
+    imports: [NgFor, NgIf, SpinnerComponent, FormsModule, NzEmptyModule, NzDatePickerModule,NzTypographyModule, CommonModule, NzSelectModule,NzModalModule],
     styleUrls: ['./payement.component.css']
 })
 export class PayementComponent implements OnInit {
