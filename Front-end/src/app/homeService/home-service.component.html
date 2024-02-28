@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Avec quel employé préférer vous ce service ?" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk(1)"
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Avec quel employé préférez-vous ce service ?" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk(1)"
     [nzOkLoading]="isOkLoading">
     <div *nzModalContent>
         <nz-radio-group *ngIf="!loadingEmp" [(ngModel)]="radioValue">

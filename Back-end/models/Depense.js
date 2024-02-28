@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 require('./Manager');
 
 const depenseSchema = new mongoose.Schema({
-    manager: { type: mongoose.Schema.Types.ObjectId , ref: 'Manager' },
+    // manager: { type: mongoose.Schema.Types.ObjectId , ref: 'Manager' },
     salaire: { type: Number },
     achat_piece: { type: Number },
     loyer: { type: Number },

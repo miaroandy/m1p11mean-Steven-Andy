@@ -30,7 +30,7 @@ export class FormDepenseComponent {
     this.loading = true;
     this.callAPI.saveDepense(this.depense).subscribe(
       (data: any) => {
-        this.router.navigate(['/employe/depense'])
+        this.router.navigate(['/admin/depense'])
         this.loading=false;
       },
       (error: any) => {

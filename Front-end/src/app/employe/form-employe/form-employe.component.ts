@@ -30,7 +30,7 @@ export class FormEmployeComponent {
     this.loading = true;
     this.callAPI.saveEmploye(this.employe).subscribe(
       (data: any) => {
-        this.router.navigate(['/employe'])
+        this.router.navigate(['/admin/employe'])
         this.loading=false;
       },
       (error: any) => {
