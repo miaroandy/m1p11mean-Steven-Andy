@@ -1,0 +1,13 @@
+
+<div class="service-item">
+    <img [src]="service.photo" alt="Haircut"
+        style="width: 100%; height: 100%; object-fit: cover; max-width: 300px; max-height: 200px;">
+    <h3>{{service.nom}}</h3>
+    <p>Une duree de {{ service.duree}} minutes avec une réduction de
+        <strong>{{service.offres_speciales[0].reduction *100}}%</strong> </p>
+    <p>Au prix de <strong>{{ service.prix-(service.prix *service.offres_speciales[0].reduction )}} Ar</strong> au
+        lieu de {{service.prix}} Ar</p>
+    <p>Debut de l'offre le {{service.offres_speciales[0].datedebut | date:'dd/MM/yyyy'}} jusqu'au
+        {{service.offres_speciales[0].datefin | date:'dd/MM/yyyy'}}</p>
+</div>
+            

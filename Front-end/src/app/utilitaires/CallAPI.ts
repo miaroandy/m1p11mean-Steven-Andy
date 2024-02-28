@@ -158,7 +158,12 @@ export class CallAPI {
         return this.http.get<Service[]>(url);
     }
 
-    login(user: Login): Observable<Token>{
+    getPromotion(): Observable<Service[]> {
+        const url = this.apiUrl + "services/promotion";
+        return this.http.get<Service[]>(url);
+    }
+
+    login(user: Login, etat:number): Observable<Token>{
         const url = this.apiUrl + "login";
         return this.http.post<Token>(url,user).pipe(
             tap((response) => {
@@ -166,7 +171,7 @@ export class CallAPI {
                 localStorage.setItem('identifiant',response.identifiant);
                 localStorage.setItem('role',response.role);
             }),
-            catchError((error) => this.handleError(error, [],1))
+            catchError((error) => this.handleError(error, [],etat))
         );
     }
 
